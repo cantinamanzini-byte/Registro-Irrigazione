@@ -1,1 +1,1767 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Quaderno di Campo V2 - Irrigazioni e Concimazioni</title>
+  <style>
+    :root{--bg:#f4f7f4;--card:#fff;--text:#1d2b1f;--muted:#627063;--green:#246b3a;--green2:#2f8a4d;--soft:#e8f3eb;--danger:#b3261e;--line:#d9e4dc;--shadow:0 6px 22px rgba(0,0,0,.08)}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--text);font-size:17px;line-height:1.35}
+    .app{max-width:760px;margin:0 auto;padding:14px 12px calc(90px + env(safe-area-inset-bottom))}.top{position:sticky;top:0;z-index:9;background:rgba(244,247,244,.96);backdrop-filter:blur(8px);padding:10px 0 12px;border-bottom:1px solid var(--line)}
+    h1{font-size:25px;margin:4px 0 2px}.sub{color:var(--muted);font-size:14px;margin:0 0 10px}.nav{display:grid;grid-template-columns:1fr 1fr;gap:8px}.nav button,.home-grid button,button{border:0;border-radius:14px;padding:13px 12px;font-size:16px;font-weight:700;background:var(--green);color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}button.secondary{background:#eef6f0;color:var(--green);border:1px solid #cfe2d4;box-shadow:none}button.danger{background:var(--danger)}button.gray{background:#53645a}.home-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);padding:15px;margin:14px 0}.hidden{display:none!important}h2{font-size:22px;margin:0 0 12px}h3{font-size:18px;margin:14px 0 8px;color:var(--green)}
+    label{display:block;font-weight:700;margin:10px 0 5px}input,select,textarea{width:100%;font-size:17px;padding:13px;border:1px solid #cdd8d0;border-radius:13px;background:#fff;color:var(--text)}textarea{min-height:76px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.full{grid-column:1/-1}.pill{display:inline-block;background:var(--soft);color:var(--green);padding:5px 9px;border-radius:999px;font-size:13px;font-weight:800;margin:3px 4px 3px 0}.result{background:#f7fbf8;border:1px dashed #bad3c0;border-radius:16px;padding:12px;margin:12px 0}.big-result{font-size:22px;font-weight:900;color:var(--green)}.small{font-size:13px;color:var(--muted)}.list{display:grid;gap:10px;margin-top:10px}.item{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px}.item-title{font-size:18px;font-weight:900;margin-bottom:5px}.item-meta{color:var(--muted);font-size:14px}.item-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.item-actions button{padding:10px;font-size:14px}.fixed-home{position:fixed;right:16px;bottom:18px;border-radius:999px;padding:14px 17px;z-index:20;background:var(--green2)}.notice{background:#fff8e5;border:1px solid #eed48a;color:#69510c;border-radius:14px;padding:10px;font-size:14px;margin:10px 0}.ok{background:#eaf7ee;border:1px solid #b7dfc3;color:#20592f}.split-title{display:flex;align-items:center;justify-content:space-between;gap:8px}.split-title button{padding:9px 12px;font-size:14px}.table-tools{display:grid;grid-template-columns:1fr;gap:8px;margin:8px 0 10px}.checkline{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;margin:8px 0}.checkline input{width:24px;height:24px;margin-top:3px;flex:0 0 auto}.sector-box{background:#f7fbf8;border:1px solid var(--line);border-radius:16px;padding:10px;margin-top:10px}.sector-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.sector-actions button{font-size:14px;padding:10px}.filari-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin:9px 0}.filare-btn{background:#eef6f0!important;color:#246b3a!important;border:1px solid #cfe2d4!important;box-shadow:none!important;border-radius:12px!important;padding:10px 4px!important;min-height:42px!important;font-size:15px!important}.filare-btn.sel{background:#246b3a!important;color:#fff!important;border-color:#246b3a!important}.filari-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:7px 0}.filari-tools button{font-size:14px;padding:10px;min-height:40px}.guide-step{background:#f7fbf8;border:1px solid var(--line);border-radius:16px;padding:12px;margin:10px 0}.guide-step b{color:var(--green)}.quick-label{font-size:13px;color:var(--muted);font-weight:800;margin:9px 0 4px}.quick-select{font-size:18px;font-weight:800;border:2px solid #246b3a;background:#fff}.backup-big button{min-height:58px;font-size:18px}.backup-danger button{min-height:56px;font-size:17px}
+    @media(max-width:520px){.filari-grid{grid-template-columns:repeat(4,1fr);gap:6px}.filare-btn{font-size:16px!important;min-height:46px!important}body{font-size:16px}.app{padding:10px 9px 92px}.nav{grid-template-columns:1fr 1fr}.row,.row3,.actions{grid-template-columns:1fr}h1{font-size:23px}.card{border-radius:18px;padding:13px}.home-grid button,.nav button,button{min-height:48px}.item-actions{grid-template-columns:1fr 1fr}.fixed-home{display:none}}
 
+
+    /* V39 - layout compatto: il menu NON resta fisso mentre scorri */
+    .app{max-width:980px;padding:10px 10px 24px!important}
+    .top{position:static!important;top:auto!important;z-index:auto!important;background:transparent!important;backdrop-filter:none!important;padding:6px 0 8px!important;border-bottom:0!important}
+    h1{font-size:22px!important;margin:2px 0 0!important}
+    .sub{font-size:13px!important;margin:0 0 6px!important}
+    .nav{grid-template-columns:repeat(4,1fr)!important;gap:6px!important;margin-bottom:6px!important}
+    .nav button{border-radius:10px!important;padding:8px 6px!important;min-height:34px!important;font-size:13px!important;box-shadow:none!important;line-height:1.15!important}
+    .quick-label{font-size:12px!important;margin:4px 0 3px!important}
+    .quick-select{font-size:14px!important;font-weight:700!important;padding:7px 9px!important;border-radius:10px!important;border-width:1px!important;min-height:36px!important}
+    .home-grid{grid-template-columns:repeat(2,1fr)!important;gap:7px!important;margin-top:8px!important}
+    .home-grid button{border-radius:11px!important;padding:9px 8px!important;min-height:38px!important;font-size:14px!important;box-shadow:none!important;line-height:1.15!important}
+    .card{border-radius:16px!important;padding:12px!important;margin:10px 0!important}
+    h2{font-size:20px!important;margin:0 0 9px!important}
+    h3{font-size:17px!important;margin:11px 0 6px!important}
+    label{margin:7px 0 4px!important}
+    input,select,textarea{font-size:16px!important;padding:9px 10px!important;border-radius:10px!important}
+    textarea{min-height:62px!important}
+    .actions{gap:7px!important;margin-top:9px!important}
+    .actions button, .item-actions button, .sector-actions button, .filari-tools button{padding:8px 8px!important;min-height:34px!important;font-size:14px!important;border-radius:10px!important;box-shadow:none!important;line-height:1.15!important}
+    .backup-big button,.backup-danger button{min-height:40px!important;font-size:14px!important}
+    .notice{padding:8px!important;margin:8px 0!important;border-radius:11px!important;font-size:13px!important}
+    .fixed-home{display:none!important}
+    /* V43 - stagioni, dashboard, calendario, pallini stato campo, storico campo */
+    .season-bar{display:flex;align-items:center;gap:8px;margin:4px 0 6px;flex-wrap:wrap}
+    .season-lbl{font-weight:800;color:var(--green);font-size:13px;margin:0!important}
+    .season-sel{flex:0 0 auto!important;width:auto!important;min-height:32px!important;font-size:14px!important;padding:5px 9px!important;border:2px solid var(--green)!important;border-radius:10px!important;font-weight:800!important}
+    .season-info{font-size:12px;color:var(--muted)}
+    .home-main button{background:var(--green2)!important;min-height:52px!important;font-size:16px!important;font-weight:900!important}
+    .dash-box{margin-top:10px}
+    .dash-title{font-size:13px;color:var(--muted);font-weight:800;margin:4px 0}
+    .dash-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 11px;margin:6px 0;font-size:14px}
+    .dash-item b{color:var(--green)}
+    .stato-pallino{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle;margin-right:6px;border:1px solid rgba(0,0,0,.15)}
+    .stato-ok{background:#27a04c}
+    .stato-warn{background:#f0a000}
+    .stato-nuovo{background:#bbb}
+    .ultima-irr{font-size:12px;color:var(--muted);margin-top:3px;font-style:italic}
+    .ultima-warn{color:#b3651b;font-weight:700;font-style:normal}
+    .storico-box{background:#f7fbf8;border:1px solid #bad3c0;border-radius:14px;padding:10px;margin:12px 0}
+    .storico-box h3{margin:0 0 8px}
+    .storico-rig{font-size:14px;padding:5px 0;border-bottom:1px dashed #cfe2d4}
+    .storico-rig:last-child{border-bottom:0}
+    .storico-tot{font-weight:800;color:var(--green);margin-top:7px;padding-top:7px;border-top:1px solid #cfe2d4}
+    .cal-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:8px 0}
+    .cal-nav{padding:7px 14px!important;min-height:36px!important;font-size:18px!important;font-weight:900!important}
+    .cal-titolo{flex:1;text-align:center;font-size:17px;font-weight:900;color:var(--green)}
+    .cal-week{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px}
+    .cal-week>div{text-align:center;font-size:12px;font-weight:800;color:var(--muted);padding:4px 0}
+    .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+    .cal-cell{background:#fff;border:1px solid var(--line);border-radius:9px;min-height:56px;padding:4px;font-size:11px;cursor:pointer;text-align:left;color:var(--text);box-shadow:none;font-weight:normal}
+    .cal-cell:disabled{background:transparent;border-color:transparent;cursor:default}
+    .cal-cell.oggi{border:2px solid var(--green);background:#eef6f0}
+    .cal-cell.has-irr{background:#dbeede;border-color:#9bc7a8;font-weight:600}
+    .cal-cell.selected{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+    .cal-num{font-size:13px;font-weight:800;line-height:1}
+    .cal-tag{font-size:10px;line-height:1.1;margin-top:2px;display:block;color:var(--green);word-break:break-word}
+    .cal-cell.selected .cal-tag{color:#fff}
+    .cal-cell.selected .cal-num{color:#fff}
+    .cal-dett{margin-top:10px}
+    @media(max-width:520px){
+      .cal-cell{min-height:48px;padding:3px;font-size:10px}
+      .cal-num{font-size:12px}
+      .cal-tag{font-size:9px}
+    }
+    /* V44 - piani di irrigazione */
+    .piano-bar{background:#eef6f0;border:1px solid #cfe2d4;border-radius:14px;padding:10px;margin-bottom:8px}
+    .piano-lbl{font-weight:800;color:var(--green);margin:0 0 6px!important}
+    .piano-row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+    .piano-row select{margin:0}
+    .piano-row button{padding:10px 16px;white-space:nowrap}
+    .piano-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;border-left:5px solid var(--green2)}
+    .piano-card .item-title{color:var(--green)}
+    /* Quaderno V1 - concimi */
+    .conc-box{background:#fff7ec;border:1px solid #f0d9b0;border-radius:14px;padding:12px;margin:10px 0}
+    .conc-box h3{color:#b3681b;margin-top:0}
+    .search-row{margin-bottom:8px}
+    .mix-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;margin:6px 0;display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .mix-item .mix-actions{display:flex;gap:6px;flex:0 0 auto}
+    .mix-item button{padding:7px 10px;font-size:13px}
+    .tag-method{display:inline-block;background:#e7eef9;color:#274b8f;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:800;margin:3px 4px 3px 0}
+    .tag-conc{background:#fff0d8;color:#b3681b}
+    .tag-irr{background:#e0f0e4;color:#246b3a}
+    /* slider ore */
+    .slider-ore{margin-top:10px}
+    .slider-ore input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:8px;background:linear-gradient(var(--green),var(--green)) no-repeat #d9e4dc;background-size:42% 100%;outline:none;padding:0;border:0}
+    .slider-ore input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--green);border:3px solid #fff;cursor:pointer;box-shadow:0 1px 5px rgba(36,107,58,.5)}
+    .slider-ore input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--green);border:3px solid #fff;cursor:pointer}
+    .slider-lab{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:12px;color:var(--muted)}
+    .slider-lab #sliderOreVal{font-weight:900;color:var(--green);font-size:15px}
+    .mm-live{margin-top:12px;background:#fffdf8;border:1px solid var(--line);border-radius:14px;padding:14px 16px;text-align:center}
+    .mm-live .big{font-size:40px;font-weight:900;color:var(--green);line-height:1}
+    .mm-live .big small{font-size:20px;margin-left:3px}
+    .mm-live .det{font-size:13px;color:var(--muted);margin-top:6px}
+    .mm-live.vuoto{color:var(--muted);font-size:13px;text-align:left;padding:10px 12px}
+    /* scheda pozzi curata */
+    .pozzi-card{margin-top:12px;background:#eef2f4;border:1px solid #dde6ea;border-radius:14px;padding:14px}
+    .pozzi-card h4{margin:0 0 2px;color:#5d6b78;font-size:17px}
+    .pozzi-card .pn{font-size:12px;color:#8a98a3;margin-bottom:10px}
+    .pozzi-card .prow{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #e2e9ec;font-size:14px}
+    .pozzi-card .prow:last-of-type{border-bottom:none}
+    .pozzi-card .prow .lmin{font-weight:800;color:#5d6b78}
+    .pozzi-card .ptot{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:10px;border-top:2px solid #d4dfe4}
+    .pozzi-card .ptot .lmin{font-size:20px;font-weight:900;color:#5d6b78}
+    .pozzi-card .preq{font-size:13px;color:var(--muted);margin-top:8px}
+    .pozzi-card .pstatus{margin-top:10px;font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:10px}
+    .pozzi-card .pstatus.ok{background:#e7f0e4;color:#3f5c3a}
+    .pozzi-card .pstatus.no{background:#f6e6e1;color:#8a3f2e}
+    .pozzi-card .pdot{width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
+  </style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <h1>Quaderno di Campo</h1>
+    <p class="sub">V2 · irrigazioni + concimazioni · piani · slider ore · fascia bagnata · WhatsApp</p>
+    <div class="season-bar">
+      <label class="season-lbl">Stagione</label>
+      <select id="stagioneSel" class="season-sel" onchange="cambiaStagione(this.value)"></select>
+      <span id="stagioneInfo" class="season-info"></span>
+    </div>
+    <div class="nav">
+      <button onclick="showSection('home')">Home</button>
+      <button onclick="showSection('nuova')">Nuova operazione</button>
+      <button onclick="showSection('registro')">Registro</button>
+      <button onclick="showSection('calendario')">Calendario</button>
+      <button onclick="showSection('piani')">Piani</button>
+      <button onclick="showSection('campi')">Campi</button>
+      <button onclick="showSection('concimi')">Concimi</button>
+      <button onclick="showSection('pozzi')">Pozzi</button>
+      <button onclick="showSection('descrizioni')">Descrizioni</button>
+      <button onclick="showSection('guida')">Guida</button>
+      <button onclick="showSection('sync')">Sync</button>
+      <button onclick="showSection('backup')">Backup</button>
+    </div>
+    <label class="quick-label">Vai alla sezione</label>
+    <select id="sezioneRapida" class="quick-select" onchange="showSection(this.value)">
+      <option value="home">Home</option>
+      <option value="nuova">Nuova operazione</option>
+      <option value="registro">Registro</option>
+      <option value="calendario">Calendario</option>
+      <option value="piani">Piani di irrigazione</option>
+      <option value="campi">Campi</option>
+      <option value="concimi">Magazzino concimi</option>
+      <option value="calcolo">Calcolo rapido</option>
+      <option value="riepilogo">Riepilogo stagione</option>
+      <option value="pozzi">Pozzi</option>
+      <option value="descrizioni">Descrizioni</option>
+      <option value="guida">Guida</option>
+      <option value="sync">Sync</option>
+      <option value="backup">Backup / Pulizia</option>
+    </select>
+  </div>
+
+  <section id="home" class="card section">
+    <h2>Home</h2>
+    <div class="home-grid home-main">
+      <button onclick="showSection('nuova')">➕ Nuova operazione</button>
+      <button onclick="showSection('registro')">📋 Registro</button>
+    </div>
+    <div id="dashboardUltime" class="dash-box"></div>
+    <h3 style="margin-top:14px">Configurazione</h3>
+    <div class="home-grid">
+      <button onclick="showSection('campi')" class="secondary">🌱 Campi / Impianti / Varietà</button>
+      <button onclick="showSection('concimi')" class="secondary">🧪 Magazzino concimi</button>
+      <button onclick="showSection('piani')" class="secondary">📑 Piani di irrigazione</button>
+      <button onclick="showSection('calendario')" class="secondary">📅 Calendario</button>
+      <button onclick="showSection('pozzi')" class="secondary">💧 Pozzi / portate</button>
+      <button onclick="showSection('riepilogo')" class="secondary">📊 Riepilogo stagione</button>
+      <button onclick="showSection('calcolo')" class="secondary">🧮 Calcolo rapido mm</button>
+      <button onclick="showSection('descrizioni')" class="secondary">🏷️ Descrizioni</button>
+    </div>
+    <h3 style="margin-top:14px">Sistema</h3>
+    <div class="home-grid">
+      <button onclick="showSection('sync')" class="secondary">☁️ Google Sheets Sync</button>
+      <button onclick="showSection('backup')" class="secondary">💾 Backup</button>
+      <button onclick="showSection('guida')" class="secondary">🧭 Guida</button>
+    </div>
+    <div class="notice ok"><b>Quaderno di Campo V1:</b> ora un solo programma per irrigazioni e concimazioni. I campi sono in comune. Le fertirrigazioni e le manichette contano sia come irrigazione sia come concimazione. WhatsApp e stampe disponibili per entrambe.</div>
+  </section>
+
+  <section id="campi" class="card section hidden">
+    <div class="split-title"><h2>Campi / Impianti</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="secondary" onclick="stampaCampi()">Stampa campi</button><button class="secondary" onclick="resetCampoForm()">Nuovo</button></div></div>
+    <input type="hidden" id="campoEditId">
+    <label>Nome campo</label><input id="nomeCampo" placeholder="Es. Ciliegio Settecani">
+    <label>Coltura</label><input id="coltura" list="listaColture" placeholder="Vigneto, ciliegio, ecc."><datalist id="listaColture"></datalist>
+    <div class="row3">
+      <div><label>Filari totali</label><input id="filariTot" type="number" min="0" step="1" inputmode="numeric" placeholder="Es. 105"></div>
+      <div><label>Lunghezza media 1 filare (m)</label><input id="lungFilare" type="number" min="0" step="0.01" inputmode="decimal"></div>
+      <div><label>Interfila (m)</label><input id="interfila" type="number" min="0" step="0.01" inputmode="decimal"></div>
+    </div>
+    <div class="small">Scrivi qui il numero reale dei filari del campo. Esempio: se il vigneto ha 105 filari, scrivi <b>105</b>. Sotto, nella varietà, compariranno automaticamente i pulsanti 1, 2, 3 ... 105 da selezionare.</div>
+    <div class="row">
+      <div><label>Superficie calcolata m²</label><input id="supCalc" readonly></div>
+      <div><label>Ettari calcolati</label><input id="haCalc" readonly></div>
+    </div>
+    <label>Ettari manuali opzionali</label><input id="haManuali" type="number" min="0" step="0.0001" inputmode="decimal" placeholder="Lascia vuoto se vuoi usare il calcolato">
+    <label>Tipo irrigazione</label>
+    <select id="tipoIrr" onchange="toggleTipo(); aggiornaAnteprimaCampo()">
+      <option value="ala">Ala gocciolante</option>
+      <option value="micro">Micro spruzzi</option>
+    </select>
+    <input type="hidden" id="aperturaCampo" value="totale">
+    <label>Campo totale / parziale</label>
+    <input id="tipoCampoAuto" readonly value="Calcolo automatico in base ai filari inseriti">
+    <div class="small">Non devi scegliere tu: il programma controlla i filari totali e quelli assegnati alle varietà. Se tutti i filari sono assegnati una sola volta risulta <b>Totale</b>; se mancano filari o il campo viene usato solo a settori risulta <b>Parziale / a settori</b>.</div>
+
+    <div id="boxAla">
+      <h3>Ala gocciolante</h3>
+      <div class="row">
+        <div><label>Passo gocciolatori (m)</label><input id="passoGoccia" type="number" min="0" step="0.01" value="0.5" inputmode="decimal" placeholder="0,40 - 0,50 - 0,60" oninput="aggiornaAnteprimaCampo()"></div>
+        <div><label>Portata gocciolatore L/ora</label><input id="portataGoccia" type="number" min="0" step="0.01" value="2.3" inputmode="decimal"></div>
+      </div>
+      <label>Larghezza fascia bagnata ala (m)</label>
+      <input id="larghezzaBagnataAla" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Es. 0,60 - 0,80 - 1,00">
+      <div class="notice">Per l’ala gocciolante il programma mostra i <b>mm sul campo</b> e, se inserisci la larghezza, anche i <b>mm nella fascia realmente bagnata</b>.</div>
+    </div>
+
+    <div id="boxMicro" class="hidden">
+      <h3>Micro spruzzi</h3>
+      <div class="row">
+        <div><label>Numero micro spruzzi totali</label><input id="numMicro" type="number" min="0" step="1" inputmode="numeric"></div>
+        <div><label>Portata micro spruzzo L/ora</label><input id="portataMicro" type="number" min="0" step="0.01" value="50" inputmode="decimal"></div>
+      </div>
+      <label>Diametro bagnatura micro spruzzo (m)</label>
+      <input id="diametroMicro" type="number" min="0" step="0.01" value="5" inputmode="decimal" placeholder="Es. 4 o 5">
+      <div class="notice">Per i micro spruzzi il programma mostra sia i mm sulla superficie irrigata, sia i mm nella zona bagnata dal singolo micro spruzzo.</div>
+    </div>
+
+    <h3>Settori / varietà del campo</h3>
+    <div class="notice">Descrizione guidata: prima scrivi i filari totali del campo. Poi assegna a ogni varietà i numeri reali dei filari. Esempio: Bigarò = filari 1, 5, 6; Ferrovia = filari 11, 17, 26. Alla fine il programma controlla se tornano tutti i filari del campo.</div>
+    <input type="hidden" id="settoreEditIndex" value="">
+    <label>Nome settore / varietà</label><input id="settoreNome" list="listaVarieta" placeholder="Es. Bigarò, Early, Ferrovia"><datalist id="listaVarieta"></datalist>
+    <div class="notice">Tocca i numeri dei filari che appartengono a questa varietà. Esempio: per <b>Bigarò</b> premi <b>1</b>, <b>5</b>, <b>6</b>. Per <b>Ferrovia</b> premi <b>11</b>, <b>17</b>, <b>26</b>.</div>
+    <label>Numeri filari della varietà</label>
+    <input id="settoreNumeri" type="hidden">
+    <div class="filari-tools"><button type="button" class="secondary" onclick="selezionaTuttiFilari('settoreNumeri','settorePicker', n(filariTot.value))">Seleziona tutti</button><button type="button" class="gray" onclick="pulisciFilari('settoreNumeri','settorePicker')">Pulisci filari</button></div>
+    <div id="settorePicker" class="filari-grid"></div>
+    <div id="settoreConta" class="small">Totale filari selezionati: 0</div>
+    <div class="row">
+      <div><label>Lunghezza filare della varietà (m)</label><input id="settoreLung" type="number" min="0" step="0.01" inputmode="decimal" placeholder="se diversa dalla media"></div>
+      <div><label>Micro spruzzi opz.</label><input id="settoreMicro" type="number" min="0" step="1" inputmode="numeric" placeholder="solo se diverso"></div>
+    </div>
+    <div class="small">Puoi lasciare vuoto: il programma usa la lunghezza media del campo. Se una varietà ha filari più corti o più lunghi, inserisci qui la lunghezza giusta.</div>
+    <div class="actions">
+      <button class="secondary" onclick="aggiungiSettoreForm()">Salva settore nel campo</button>
+      <button class="gray" onclick="resetSettoreForm()">Pulisci settore</button>
+    </div>
+    <div id="listaSettoriForm" class="list"></div>
+
+    <label>Note</label><textarea id="noteCampo"></textarea>
+    <div id="anteprimaCampo" class="result"></div>
+    <div class="actions">
+      <button onclick="salvaCampo()">Salva campo</button>
+      <button class="gray" onclick="resetCampoForm()">Chiudi modifica</button>
+    </div>
+
+    <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+    <div class="split-title"><h2>Campi salvati</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="secondary" onclick="stampaCampi()">Stampa</button><button id="btnCampiList" class="secondary" onclick="toggleLista('campiListWrap','btnCampiList')">Apri tabella</button></div></div>
+    <div id="campiListWrap" class="hidden">
+      <div class="table-tools"><input id="cercaCampi" placeholder="Cerca campo, coltura, varietà..." oninput="renderCampi()"></div>
+      <div id="listaCampi" class="list"></div>
+    </div>
+  </section>
+
+  <section id="concimi" class="card section hidden">
+    <div class="split-title"><h2>Magazzino concimi</h2><button class="secondary" onclick="resetConcimeForm()">Nuovo</button></div>
+    <div class="notice ok">Inserisci i concimi che usi con i loro titoli. Servono per calcolare le unità di azoto (N), fosforo (P), potassio (K), magnesio (Mg) e calcio (Ca) distribuite in ogni concimazione.</div>
+    <input type="hidden" id="concimeEditId">
+    <label>Nome concime</label><input id="concNome" placeholder="Es. Haifa Multi K, Urea, Calcinit">
+    <div class="row3">
+      <div><label>N %</label><input id="concN" type="number" min="0" step="0.01" inputmode="decimal" placeholder="azoto"></div>
+      <div><label>P %</label><input id="concP" type="number" min="0" step="0.01" inputmode="decimal" placeholder="fosforo"></div>
+      <div><label>K %</label><input id="concK" type="number" min="0" step="0.01" inputmode="decimal" placeholder="potassio"></div>
+    </div>
+    <div class="row">
+      <div><label>Mg %</label><input id="concMg" type="number" min="0" step="0.01" inputmode="decimal" placeholder="magnesio"></div>
+      <div><label>Ca %</label><input id="concCa" type="number" min="0" step="0.01" inputmode="decimal" placeholder="calcio"></div>
+    </div>
+    <div class="actions">
+      <button onclick="salvaConcime()">Salva concime</button>
+      <button class="gray" onclick="resetConcimeForm()">Chiudi modifica</button>
+    </div>
+    <div class="split-title"><h2>Concimi salvati</h2><button id="btnConcimiList" class="secondary" onclick="toggleLista('concimiListWrap','btnConcimiList')">Apri tabella</button></div>
+    <div id="concimiListWrap" class="hidden">
+      <div class="table-tools"><input id="cercaConcimeMag" placeholder="Cerca concime..." oninput="renderConcimi()"></div>
+      <div id="listaConcimi" class="list"></div>
+    </div>
+  </section>
+
+  <section id="nuova" class="card section hidden">
+    <h2 id="titoloNuova">Nuova operazione</h2>
+    <input type="hidden" id="irrEditId">
+    <div class="piano-bar">
+      <label class="piano-lbl">📑 Parti da un piano già pronto (opzionale)</label>
+      <div class="piano-row">
+        <select id="selCaricaPiano" onchange="caricaPianoSelezionato()"><option value="">-- scegli un piano --</option></select>
+        <button class="secondary" onclick="caricaPianoSelezionato()">Carica</button>
+      </div>
+      <div class="small">Scegli un piano dal menu: i campi si caricano subito. Poi inserisci solo le ore e salva.</div>
+    </div>
+
+    <label>Tipo di operazione</label>
+    <select id="tipoOperazione" onchange="toggleTipoOperazione()">
+      <option value="irrigazione">💧 Solo irrigazione (acqua)</option>
+      <option value="concimazione">🧪 Concimazione</option>
+    </select>
+
+    <div id="boxMetodo" class="hidden">
+      <label>Metodo di distribuzione concime</label>
+      <select id="metodoConc" onchange="toggleMetodo()">
+        <option value="Fertirrigazione">Fertirrigazione (con impianto, acqua + concime)</option>
+        <option value="Manichetta">Manichetta (botte con barre laterali, acqua + concime)</option>
+        <option value="Spandiconcime">Spandiconcime (granulare, senza acqua)</option>
+        <option value="Localizzato">Localizzato (granulare, senza acqua)</option>
+        <option value="Fogliare">Fogliare (senza acqua)</option>
+        <option value="Interramento">Interramento (senza acqua)</option>
+        <option value="Pieno campo">Spandimento a pieno campo (senza acqua)</option>
+      </select>
+      <div id="noteMetodo" class="small"></div>
+    </div>
+
+    <label>Data</label><input id="dataIrr" type="date">
+
+    <div id="boxOre">
+      <label>Ore irrigazione</label><input id="oreIrr" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Es. 5 oppure 2.5" oninput="sincronizzaSliderOre(); aggiornaAnteprimaIrr()">
+      <div class="slider-ore">
+        <input type="range" id="sliderOre" min="0.5" max="24" step="0.5" value="5" oninput="oreIrr.value=this.value; aggiornaSliderFill(); aggiornaAnteprimaIrr()">
+        <div class="slider-lab"><span>0,5h</span><span id="sliderOreVal">5 ore</span><span>24h</span></div>
+      </div>
+      <div id="mmLive" class="mm-live"></div>
+    </div>
+
+    <div id="boxBotti" class="hidden">
+      <label>Numero botti da 10 hl (1000 L) usate</label>
+      <input id="nBotti" type="number" min="0" step="0.5" inputmode="decimal" placeholder="Es. 2" oninput="aggiornaAnteprimaIrr()">
+      <div class="row">
+        <div><label>File trattate per passata</label><input id="fileBotte" type="number" min="1" step="1" inputmode="numeric" placeholder="2 vigneto / 1 frutteto"></div>
+        <div><label>Litri per botte</label><input id="litriBotte" type="number" min="0" step="1" value="1000" inputmode="numeric"></div>
+      </div>
+      <div class="small">Acqua totale = numero botti × litri per botte. Modificabile a ogni intervento.</div>
+    </div>
+
+    <label>Campo da aggiungere alla stessa operazione</label><select id="campoIrr" onchange="campoIrrChanged()"></select><div class="small">Puoi aggiungere quanti campi vuoi: scegli il campo, spunta le varietà o seleziona tutto, premi <b>Aggiungi</b>, poi scegli un altro campo e ripeti.</div>
+    <label>Cosa tratti di questo campo?</label>
+    <select id="modoRiga" onchange="toggleModoRiga()">
+      <option value="settori">Settori / varietà con spunta</option>
+      <option value="tutti">Tutti i filari del campo</option>
+      <option value="parziale">Solo alcuni filari manuale</option>
+    </select>
+    <div id="boxSettoriIrr" class="sector-box"></div>
+    <div class="notice">Seleziona il campo: sotto devono comparire le varietà/settori salvati. Poi spunta quelli trattati e premi “Aggiungi”.</div>
+    <div id="boxParziale" class="hidden">
+      <label>Filari trattati manuali</label>
+      <input id="numeriFilariIrr" type="hidden">
+      <div class="filari-tools"><button type="button" class="secondary" onclick="selezionaTuttiFilariIrr()">Seleziona tutti</button><button type="button" class="gray" onclick="pulisciFilari('numeriFilariIrr','filariIrrPicker'); aggiornaAnteprimaIrr()">Pulisci filari</button></div>
+      <div id="filariIrrPicker" class="filari-grid"></div>
+      <div id="contaFilariIrr" class="small">Totale filari: 0</div>
+      <label>Lunghezza filare trattata (m)</label><input id="lungFilareIrr" type="number" min="0" step="0.01" inputmode="decimal">
+    </div>
+    <button class="secondary" onclick="aggiungiRigheIrrigazione()">Aggiungi campo/settori all'operazione</button>
+    <div id="statusAggiuntaIrr" class="notice hidden"></div>
+    <h3>Campi / settori aggiunti</h3>
+    <div id="listaRigheIrr" class="list"></div>
+
+    <div id="boxConcime" class="hidden conc-box">
+      <h3>Concime distribuito</h3>
+      <div class="small">Scegli il concime dal magazzino, inserisci la dose kg/ha <b>oppure</b> i kg totali (l'altro lo calcola il programma in base agli ettari aggiunti). Puoi aggiungere più concimi.</div>
+      <label>Concime</label>
+      <input id="cercaConcimeIrr" class="search-row" placeholder="🔍 Cerca concime..." oninput="renderSelectConcimiIrr()">
+      <select id="selConcimeIrr"></select>
+      <div class="row">
+        <div><label>Quantità totale (kg)</label><input id="concKgTot" type="number" min="0" step="0.01" inputmode="decimal" oninput="aggiornaDoseConc()"></div>
+        <div><label>Dose kg/ha</label><input id="concDoseHa" type="number" min="0" step="0.01" inputmode="decimal" oninput="aggiornaKgConc()"></div>
+      </div>
+      <button class="secondary" onclick="aggiungiAMiscelaIrr()">Aggiungi concime alla lista</button>
+      <div id="listaMiscelaIrr" class="list"></div>
+      <div id="unitaConcime" class="result hidden"></div>
+    </div>
+
+    <label>Note</label><textarea id="noteIrr"></textarea>
+    <div id="anteprimaIrr" class="result"></div>
+    <div class="actions">
+      <button class="secondary" onclick="stampaIrrCorrente()">Stampa riepilogo</button>
+      <button class="secondary" onclick="whatsappIrrCorrente()">WhatsApp</button>
+    </div>
+    <div class="actions">
+      <button onclick="salvaIrrigazione()">Salva operazione</button>
+      <button class="gray" onclick="resetIrrForm()">Pulisci</button>
+    </div>
+  </section>
+
+  <section id="registro" class="card section hidden">
+    <div class="split-title"><h2>Registro</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="secondary" onclick="stampaRegistro()">Stampa irrigazioni</button><button class="secondary" onclick="stampaConcimazioni()">Stampa concimazioni</button><button id="btnRegistroList" class="secondary" onclick="toggleLista('registroListWrap','btnRegistroList')">Apri tabella</button></div></div>
+    <div class="notice ok"><b>A cosa serve Registro:</b> è lo storico delle operazioni della stagione selezionata (irrigazioni e concimazioni). Qui le controlli, stampi, mandi su WhatsApp, modifichi, duplichi o elimini.</div>
+    <div class="table-tools">
+      <select id="filtroRegistro" onchange="renderRegistro()">
+        <option value="tutto">Mostra tutto (irrigazioni + concimazioni)</option>
+        <option value="irrigazione">Solo irrigazioni (acqua)</option>
+        <option value="concimazione">Solo concimazioni</option>
+      </select>
+    </div>
+    <div id="registroListWrap" class="hidden">
+      <div class="table-tools"><input id="cercaRegistro" placeholder="Cerca campo, varietà o note..." oninput="renderRegistro()"></div>
+      <div id="listaRegistro" class="list"></div>
+    </div>
+  </section>
+
+  <section id="calendario" class="card section hidden">
+    <div class="split-title"><h2>Calendario irrigazioni</h2><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="secondary" onclick="calMeseOggi()">Oggi</button></div></div>
+    <div class="cal-bar">
+      <button class="secondary cal-nav" onclick="calMese(-1)">◀</button>
+      <div id="calTitolo" class="cal-titolo">—</div>
+      <button class="secondary cal-nav" onclick="calMese(1)">▶</button>
+    </div>
+    <div class="cal-week"><div>Lun</div><div>Mar</div><div>Mer</div><div>Gio</div><div>Ven</div><div>Sab</div><div>Dom</div></div>
+    <div id="calGriglia" class="cal-grid"></div>
+    <div id="calDettaglio" class="cal-dett"></div>
+    <div class="notice"><b>Come si usa:</b> ogni casella mostra una pallina verde se quel giorno hai irrigato, con le iniziali dei campi. Tocca la casella per vedere il dettaglio delle irrigazioni di quel giorno.</div>
+  </section>
+
+  <section id="piani" class="card section hidden">
+    <h2>Piani di irrigazione</h2>
+    <div class="notice ok"><b>A cosa servono:</b> sono gruppi di campi già pronti (es. "Vigneti Nord"). Li prepari qui una volta sola. Poi, quando fai un'irrigazione, scegli un piano e i campi si caricano da soli: devi solo mettere le ore.</div>
+
+    <input type="hidden" id="pianoEditId">
+    <label>Nome del piano</label><input id="pianoNome" placeholder="Es. Vigneti Nord, Frutteti, Vigneti Sud">
+    <label>Nota (opzionale)</label><input id="pianoNota" placeholder='Es. "Accendere Pozzo 1 e 3" oppure "in estate 4 ore"'>
+
+    <h3>Aggiungi campi al piano</h3>
+    <label>Campo</label><select id="pianoCampoSel" onchange="pianoCampoChanged()"></select>
+    <label>Cosa includere di questo campo?</label>
+    <select id="pianoModo" onchange="pianoToggleModo()">
+      <option value="settori">Settori / varietà con spunta</option>
+      <option value="tutti">Tutti i filari del campo</option>
+    </select>
+    <div id="pianoBoxSettori" class="sector-box"></div>
+    <button class="secondary" onclick="pianoAggiungiCampo()">Aggiungi campo al piano</button>
+    <div id="pianoListaVoci" class="list"></div>
+
+    <div class="actions">
+      <button onclick="salvaPianoForm()">Salva piano</button>
+      <button class="gray" onclick="resetPianoForm()">Pulisci</button>
+    </div>
+
+    <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+    <h2>Piani salvati</h2>
+    <div id="listaPiani" class="list"></div>
+  </section>
+
+  <section id="calcolo" class="card section hidden">
+    <h2>Calcolo rapido</h2>
+    <label>Campo</label><select id="campoCalc" onchange="aggiornaCalcoloRapido()"></select>
+    <label>Quanti mm vuoi dare?</label><input id="mmDesiderati" type="number" min="0" step="0.01" inputmode="decimal" oninput="aggiornaCalcoloRapido()">
+    <div id="risCalc" class="result"></div>
+  </section>
+
+  <section id="riepilogo" class="card section hidden">
+    <div class="split-title"><h2>Riepilogo stagione</h2><button id="btnRiepList" class="secondary" onclick="toggleLista('riepListWrap','btnRiepList')">Apri tabella</button></div>
+    <div id="riepListWrap" class="hidden"><div id="listaRiepilogo" class="list"></div></div>
+  </section>
+
+  <section id="pozzi" class="card section hidden">
+    <div class="split-title"><h2>Pozzi / portate</h2><button class="secondary" onclick="resetPozzoForm()">Nuovo</button></div>
+    <input type="hidden" id="pozzoEditId">
+    <label>Nome pozzo</label><input id="nomePozzo" placeholder="Es. Pozzo 1, Pozzo grande">
+    <label>Portata litri/minuto</label><input id="litriMinPozzo" type="number" min="0" step="0.01" inputmode="decimal" placeholder="Es. 180">
+    <label>Note</label><textarea id="notePozzo" placeholder="Es. zona, pompa, pressione..."></textarea>
+    <div class="actions">
+      <button onclick="salvaPozzo()">Salva pozzo</button>
+      <button class="gray" onclick="resetPozzoForm()">Chiudi modifica</button>
+    </div>
+    <div class="notice">Il programma usa questi dati per confrontare i litri/minuto richiesti dall'irrigazione e suggerire quali pozzi accendere.</div>
+    <div class="split-title"><h2>Pozzi salvati</h2><button id="btnPozziList" class="secondary" onclick="toggleLista('pozziListWrap','btnPozziList')">Apri tabella</button></div>
+    <div id="pozziListWrap" class="hidden">
+      <div id="listaPozzi" class="list"></div>
+    </div>
+  </section>
+
+
+  <section id="descrizioni" class="card section hidden">
+    <h2>Descrizioni</h2>
+    <div class="notice ok"><b>Descrizione guidata:</b> prepara qui gli elenchi prima di inserire i campi. I nomi salvati compariranno come suggerimenti nelle schede campo e nelle varietà. Puoi sempre scrivere anche un nome nuovo a mano.</div>
+
+    <h3>Colture</h3>
+    <div class="row">
+      <div><label>Nuova coltura</label><input id="nuovaColtura" placeholder="Es. Vigneto, Ciliegio, Melo, Pero"></div>
+      <div style="align-self:end"><button onclick="aggiungiDescrizione('colture')">Aggiungi coltura</button></div>
+    </div>
+    <div id="listaDescColture" class="list"></div>
+
+    <h3>Varietà / settori</h3>
+    <div class="row">
+      <div><label>Nuova varietà / settore</label><input id="nuovaVarieta" placeholder="Es. Glera, Ferrovia, Bigarò, Early"></div>
+      <div style="align-self:end"><button onclick="aggiungiDescrizione('varieta')">Aggiungi varietà</button></div>
+    </div>
+    <div id="listaDescVarieta" class="list"></div>
+
+    <div class="notice">I tipi impianto restano separati perché hanno calcoli diversi: <b>Ala gocciolante</b> e <b>Micro spruzzi</b>. I pozzi restano nella sezione Pozzi perché hanno anche la portata litri/minuto.</div>
+  </section>
+
+  <section id="guida" class="card section hidden">
+    <h2>Guida verifica / installazione</h2>
+    <div class="notice ok"><b>Sequenza consigliata prima di installare:</b> fai una prova completa con un campo reale, una irrigazione multipla e un backup JSON.</div>
+    <div class="notice"><b>Novità V43:</b> in alto trovi il selettore <b>Stagione</b>. Cambia stagione per vedere lo storico degli anni passati. Le nuove irrigazioni vengono assegnate automaticamente alla stagione in base alla data inserita. Campi, pozzi e descrizioni restano comuni a tutte le stagioni.</div>
+
+    <div class="guide-step"><b>1. Descrizioni</b><br>Inserisci o modifica i nomi che vuoi ritrovare come suggerimenti: colture come Vigneto, Ciliegio, Melo, Pero e varietà/settori come Glera, Ferrovia, Bigarò, Early.</div>
+    <div class="guide-step"><b>2. Campi / Impianti</b><br>Crea un campo. Inserisci filari totali, lunghezza media di 1 filare, interfila, tipo impianto e portate. Poi assegna i numeri reali dei filari alle varietà usando i pulsanti numerati: Bigarò 1,5,6; Ferrovia 11,17,26 ecc. Il controllo deve tornare con tutti i filari assegnati.</div>
+    <div class="guide-step"><b>3. Pozzi</b><br>Inserisci ogni pozzo con la sua portata in litri/minuto. Il programma li userà per suggerire quali pozzi accendere.</div>
+    <div class="guide-step"><b>4. Nuova irrigazione</b><br>Inserisci le ore, scegli un campo, spunta le varietà irrigate e premi <b>Aggiungi campo/settori alla irrigazione</b>. Puoi ripetere l’operazione con tutti i campi che vuoi nella stessa irrigazione.</div>
+    <div class="guide-step"><b>5. Sincronizzazione Google Sheets</b><br>Dopo aver creato il Web App di Google Apps Script, incolla il link nella sezione <b>Sync</b>. Con sync automatico attivo, il programma scarica all’apertura e invia dopo ogni salvataggio. I pulsanti manuali restano disponibili per sicurezza.</div>
+    <div class="guide-step"><b>6. Controlli da fare</b><br>Verifica mm, m³, litri, litri/minuto, pozzi consigliati, stampa e WhatsApp. Se tutto torna, esporta un backup JSON.</div>
+    <div class="guide-step"><b>7. Installazione iPhone</b><br>Dopo la pubblicazione online apri il link con Safari, premi Condividi e poi <b>Aggiungi alla schermata Home</b>.</div>
+
+    <div class="actions">
+      <button onclick="showSection('descrizioni')">Vai a Descrizioni</button>
+      <button class="secondary" onclick="showSection('campi')">Vai a Campi</button>
+      <button class="secondary" onclick="showSection('pozzi')">Vai a Pozzi</button>
+      <button class="secondary" onclick="showSection('nuova')">Prova irrigazione</button>
+    </div>
+  </section>
+
+
+  <section id="sync" class="card section hidden">
+    <h2>Google Sheets Sync</h2>
+    <div class="notice ok"><b>Uso consigliato:</b> dalla V43 il link Google Sheets è già incorporato e la sincronizzazione lavora in automatico. Prima fai comunque un Backup JSON quando hai inserito molti dati nuovi.</div>
+    <label>Link Web App Google Apps Script</label>
+    <input id="syncUrl" placeholder="https://script.google.com/macros/s/.../exec">
+    <div class="actions">
+      <button onclick="salvaSyncUrl()">Salva link</button>
+      <button class="secondary" onclick="testSync()">Prova collegamento</button>
+    </div>
+    <h3>Sincronizzazione automatica</h3>
+    <label class="checkline" style="align-items:center">
+      <input type="checkbox" id="autoSync" onchange="toggleAutoSync()">
+      <span><b>Sync automatico attivo</b><br><span class="small">Scarica da Google Sheets all’apertura e invia automaticamente dopo ogni salvataggio.</span></span>
+    </label>
+    <h3>Comandi manuali di sicurezza</h3>
+    <div class="actions">
+      <button onclick="syncInviaGoogle()">⬆️ Invia a Google Sheets</button>
+      <button class="secondary" onclick="syncScaricaGoogle()">⬇️ Scarica da Google Sheets</button>
+    </div>
+    <div id="syncStatus" class="notice">Nessuna sincronizzazione eseguita.</div>
+    <div class="notice"><b>Regola pratica:</b> con sync automatico attivo, lavori normalmente. Il programma invia da solo dopo Salva campo, Salva pozzo, Salva irrigazione, Descrizioni, Modifica o Elimina. I pulsanti manuali restano utili se vuoi forzare l’aggiornamento.</div>
+  </section>
+
+  <section id="backup" class="card section hidden">
+    <h2>Backup / Pulizia dati</h2>
+    <div class="notice ok"><b>Prima di cancellare:</b> premi sempre <b>Scarica backup JSON</b>. Così puoi ripristinare i dati se serve.</div>
+    <h3>Backup JSON</h3>
+    <div class="actions backup-big">
+      <button onclick="esportaJSON()">💾 Scarica backup JSON</button>
+      <button class="secondary" onclick="document.getElementById('fileImport').click()">📂 Importa backup JSON</button>
+    </div>
+    <input id="fileImport" type="file" accept="application/json" class="hidden" onchange="importaJSON(event)">
+    <div class="notice">Il backup JSON è una copia completa di campi, irrigazioni, pozzi e descrizioni. Google Sheets sincronizza, ma il backup resta la sicurezza migliore.</div>
+
+    <h3>Svuota dati prova</h3>
+    <div class="notice"><b>Usa questi pulsanti solo dopo il backup.</b> Puoi cancellare solo una parte dei dati oppure tutto. Dopo la pulizia, vai in <b>Sync</b> e premi <b>Invia a Google Sheets</b> per aggiornare anche l’altro dispositivo.</div>
+    <div class="actions backup-danger">
+      <button class="danger" onclick="svuotaDati('irrigazioni')">Cancella solo irrigazioni</button>
+      <button class="danger" onclick="svuotaDati('campi')">Cancella solo campi</button>
+      <button class="danger" onclick="svuotaDati('pozzi')">Cancella solo pozzi</button>
+      <button class="danger" onclick="svuotaDati('descrizioni')">Ripristina descrizioni base</button>
+      <button class="danger full" onclick="svuotaDati('tutto')">Svuota tutto il programma</button>
+    </div>
+    <div class="notice ok"><b>Ripartenza pulita consigliata:</b> 1) Backup JSON, 2) Cancella dati prova, 3) Sync → Invia a Google Sheets, 4) sull’altro dispositivo Sync → Scarica da Google Sheets.</div>
+  </section>
+</div>
+<button class="fixed-home" onclick="showSection('home')">Home</button>
+
+<script>
+const K='registroIrrigazioniV36';
+const SYNC_URL_KEY='registroIrrigazioniGoogleSheetsUrlV26';
+const AUTO_SYNC_KEY='registroIrrigazioniAutoSyncV27';
+const STAGIONE_KEY='registroIrrigazioniStagioneV43';
+const DEFAULT_SYNC_URL='https://script.google.com/macros/s/AKfycbwXTt4YYsmGwznP7uAKbJDTa5DkCByXCwS00PCrshjSa43oa7vEzxWCmk28oZH2J5377A/exec';
+let autoSyncTimer=null;
+let suppressAutoSync=false;
+let stagioneAttiva=new Date().getFullYear();
+let calMeseCorrente=new Date();
+let calGiornoSel=null;
+const DEFAULT_DESCRIZIONI={colture:['Vigneto','Ciliegio','Melo','Pero'], varieta:['Glera','Pinot','Ferrovia','Bigarò','Early']};
+const DEFAULT_CONCIMI=[
+  {id:'c_multik', nome:'Haifa Multi K', n:13.5, p:0, k:46.2, mg:0, ca:0},
+  {id:'c_map', nome:'Haifa MAP', n:12, p:61, k:0, mg:0, ca:0},
+  {id:'c_calcinit', nome:'Calcinit', n:15.5, p:0, k:0, mg:0, ca:26.6},
+  {id:'c_mag', nome:'Haifa Mag', n:10.5, p:0, k:0, mg:15.5, ca:0},
+  {id:'c_urea', nome:'Urea', n:46, p:0, k:0, mg:0, ca:0}
+];
+const METODI_CON_ACQUA_IMPIANTO=['Fertirrigazione'];
+const METODI_CON_ACQUA_BOTTE=['Manichetta'];
+let db={campi:[], irrigazioni:[], pozzi:[], piani:[], concimi:JSON.parse(JSON.stringify(DEFAULT_CONCIMI)), descrizioni:JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI))};
+let settoriForm=[];
+let righeIrr=[];
+let miscelaIrr=[];
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,7)}
+function n(v){return parseFloat(String(v).replace(',','.'))||0}
+function fmt(v,d=2){return (isFinite(v)?v:0).toLocaleString('it-IT',{maximumFractionDigits:d,minimumFractionDigits:d})}
+function today(){return new Date().toISOString().slice(0,10)}
+function annoData(s){const m=String(s||'').match(/^(\d{4})/); return m?parseInt(m[1],10):new Date().getFullYear();}
+function stagioneDi(irr){return irr.stagione || annoData(irr.data);}
+function giorniDa(dataStr){if(!dataStr)return null; const d=new Date(dataStr); if(isNaN(d.getTime()))return null; const oggi=new Date(); oggi.setHours(0,0,0,0); d.setHours(0,0,0,0); return Math.round((oggi-d)/86400000);}
+function testoGiorniDa(g){if(g===null||g===undefined)return ''; if(g===0)return 'oggi'; if(g===1)return 'ieri'; if(g<0)return 'fra '+Math.abs(g)+' giorni'; if(g<30)return g+' giorni fa'; if(g<60)return 'più di un mese fa'; return 'più di '+Math.floor(g/30)+' mesi fa';}
+function formatDataIT(v){
+  const s=String(v||'').trim();
+  if(!s) return '';
+  const m=s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if(m) return `${m[3]}/${m[2]}/${m[1]}`;
+  const d=new Date(s);
+  if(!isNaN(d.getTime())) return d.toLocaleDateString('it-IT',{day:'2-digit',month:'2-digit',year:'numeric'});
+  return s;
+}
+function esc(s){return String(s||'').replace(/[&<>\"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[m]))}
+function parseFilari(txt){
+  const out=[];
+  String(txt||'').replace(/;/g,',').split(',').map(x=>x.trim()).filter(Boolean).forEach(part=>{
+    if(part.includes('-')){
+      const [a,b]=part.split('-').map(x=>parseInt(x.trim(),10));
+      if(Number.isFinite(a)&&Number.isFinite(b)){
+        const start=Math.min(a,b), end=Math.max(a,b);
+        for(let i=start;i<=end;i++) out.push(i);
+      }
+    } else {
+      const v=parseInt(part,10);
+      if(Number.isFinite(v)) out.push(v);
+    }
+  });
+  return [...new Set(out)].sort((a,b)=>a-b);
+}
+function filariDaVecchio(s){
+  if(s.numeriFilari) return String(s.numeriFilari);
+  if(s.da||s.a){const a=n(s.da), b=n(s.a)||a; return `${Math.min(a,b)}-${Math.max(a,b)}`;}
+  return '';
+}
+function contaFilari(txt, fallback=0){const arr=parseFilari(txt); return arr.length||n(fallback);}
+function txtNumeriFilari(txt){const arr=parseFilari(txt); return arr.length?arr.join(', '):'';}
+function labelFilariNumeri(txt, fallback=0){const t=txtNumeriFilari(txt); const c=contaFilari(txt,fallback); return t?`n° ${t} · ${fmt(c,0)} file`:`${fmt(c,0)} file`;}
+function filariMaxCampo(){return Math.max(0, Math.floor(n(filariTot?.value)||0));}
+function setFilariValue(inputId, arr){const el=document.getElementById(inputId); if(el) el.value=[...new Set(arr.map(x=>parseInt(x,10)).filter(x=>Number.isFinite(x)&&x>0))].sort((a,b)=>a-b).join(',');}
+function aggiornaContaFilari(inputId){
+  const input=document.getElementById(inputId); const c=contaFilari(input?.value||'');
+  if(inputId==='settoreNumeri'&&document.getElementById('settoreConta')) settoreConta.textContent='Totale filari selezionati: '+c;
+  if(inputId==='numeriFilariIrr'&&document.getElementById('contaFilariIrr')) contaFilariIrr.textContent='Totale filari selezionati: '+c;
+}
+function renderFilariPicker(inputId, containerId, max){
+  const cont=document.getElementById(containerId); const inp=document.getElementById(inputId); if(!cont||!inp)return;
+  max=Math.max(0,Math.floor(n(max)));
+  let valori=parseFilari(inp.value).filter(x=>x>=1 && x<=max);
+  if(inp.value && valori.join(',')!==parseFilari(inp.value).join(',')) inp.value=valori.join(',');
+  const sel=new Set(valori);
+  if(!max){cont.innerHTML='<div class="notice">Inserisci prima il numero dei filari totali del campo.</div>'; aggiornaContaFilari(inputId); return;}
+  const titolo=max>60?`<div class="small full" style="grid-column:1/-1;margin-bottom:4px">${max} filari disponibili: scorri e tocca i numeri da assegnare.</div>`:'';
+  cont.innerHTML=titolo+Array.from({length:max},(_,i)=>{const num=i+1; return `<button type="button" class="filare-btn ${sel.has(num)?'sel':''}" onclick="toggleFilare('${inputId}','${containerId}',${num},${max})">${num}</button>`}).join('');
+  aggiornaContaFilari(inputId);
+}
+function toggleFilare(inputId, containerId, num, max){
+  const inp=document.getElementById(inputId); if(!inp)return; const arr=parseFilari(inp.value); const set=new Set(arr);
+  if(set.has(num)) set.delete(num); else set.add(num);
+  setFilariValue(inputId,[...set]); renderFilariPicker(inputId,containerId,max);
+  if(inputId==='settoreNumeri') aggiornaAnteprimaCampo(); else aggiornaAnteprimaIrr();
+}
+function pulisciFilari(inputId, containerId){const inp=document.getElementById(inputId); if(inp) inp.value=''; const max=inputId==='settoreNumeri'?filariMaxCampo():(getCampoSel()?.filariTot||0); renderFilariPicker(inputId,containerId,max); if(inputId==='settoreNumeri') aggiornaAnteprimaCampo();}
+function selezionaTuttiFilari(inputId, containerId, max){max=Math.max(0,Math.floor(n(max))); setFilariValue(inputId,Array.from({length:max},(_,i)=>i+1)); renderFilariPicker(inputId,containerId,max); if(inputId==='settoreNumeri') aggiornaAnteprimaCampo(); else aggiornaAnteprimaIrr();}
+function renderSettorePicker(){renderFilariPicker('settoreNumeri','settorePicker',filariMaxCampo());}
+function renderIrrPicker(){const c=getCampoSel(); renderFilariPicker('numeriFilariIrr','filariIrrPicker',c?.filariTot||0);}
+function selezionaTuttiFilariIrr(){const c=getCampoSel(); selezionaTuttiFilari('numeriFilariIrr','filariIrrPicker',c?.filariTot||0); aggiornaAnteprimaIrr();}
+function filariUsatiSettori(escludiIdx=-1){
+  const usati=new Set();
+  (settoriForm||[]).forEach((s,i)=>{ if(i===escludiIdx) return; parseFilari(s.numeriFilari).forEach(x=>usati.add(x)); });
+  return usati;
+}
+function reportFilariSettori(max, settori=settoriForm){
+  max=Math.max(0,Math.floor(n(max))); const map={}; const doppi=[];
+  (settori||[]).forEach(s=>parseFilari(s.numeriFilari).forEach(num=>{if(num<1||num>max)return; if(map[num]) doppi.push(num); else map[num]=s.nome;}));
+  const assegnati=Object.keys(map).map(Number).sort((a,b)=>a-b);
+  const mancanti=[]; for(let i=1;i<=max;i++) if(!map[i]) mancanti.push(i);
+  return {assegnati,mancanti,doppi:[...new Set(doppi)].sort((a,b)=>a-b)};
+}
+function htmlReportFilariCampo(max, settori=settoriForm){
+  max=Math.max(0,Math.floor(n(max))); if(!max) return '';
+  const r=reportFilariSettori(max,settori);
+  const cls=(!r.mancanti.length && !r.doppi.length)?'notice ok':'notice';
+  let html=`<div class="${cls}"><b>Controllo filari:</b> ${r.assegnati.length} assegnati su ${max}.`;
+  if(r.mancanti.length) html+=`<br><b>Filari mancanti:</b> ${r.mancanti.join(', ')}`;
+  if(r.doppi.length) html+=`<br><b>Filari doppi:</b> ${r.doppi.join(', ')}`;
+  if(!r.mancanti.length && !r.doppi.length) html+='<br>Tutti i filari del campo sono assegnati una sola volta.';
+  html+='</div>'; return html;
+}
+function campoModalitaAuto(c){
+  const max=Math.max(0,Math.floor(n(c?.filariTot)));
+  const settori=c?.settori||[];
+  if(!max || !settori.length) return 'totale';
+  const r=reportFilariSettori(max, settori);
+  return (!r.mancanti.length && !r.doppi.length) ? 'totale' : 'parziale';
+}
+function labelCampoModalita(c){
+  return campoModalitaAuto(c)==='totale' ? 'Totale' : 'Parziale / a settori';
+}
+function prossimoFilareLibero(){
+  const max=filariMaxCampo(); if(!max) return '';
+  const usati=filariUsatiSettori(settoreEditIndex.value===''?-1:parseInt(settoreEditIndex.value,10));
+  for(let i=1;i<=max;i++) if(!usati.has(i)) return i;
+  return max;
+}
+function assegnaFilariVarieta(){
+  const max=filariMaxCampo();
+  if(!max){alert('Inserisci prima i filari totali del campo.'); return;}
+  const start=Math.floor(n(settoreStart.value));
+  const count=Math.floor(n(settoreCount.value));
+  if(!start || !count){alert('Inserisci primo filare e numero filari della varietà.'); return;}
+  if(start<1 || start>max){alert('Il primo filare deve essere tra 1 e '+max+'.'); return;}
+  const end=start+count-1;
+  if(end>max){alert('Con questi dati arrivi al filare '+end+', ma il campo ha solo '+max+' filari.'); return;}
+  const arr=[]; for(let i=start;i<=end;i++) arr.push(i);
+  const idx=settoreEditIndex.value===''?-1:parseInt(settoreEditIndex.value,10);
+  const usati=filariUsatiSettori(idx);
+  const doppi=arr.filter(x=>usati.has(x));
+  if(doppi.length && !confirm('Attenzione: questi filari risultano già assegnati ad altra varietà: '+doppi.join(', ')+'. Vuoi assegnarli comunque?')) return;
+  setFilariValue('settoreNumeri',arr);
+  renderSettorePicker();
+  aggiornaAnteprimaCampo();
+}
+
+function load(){
+  const raw=localStorage.getItem(K)||localStorage.getItem('registroIrrigazioniV35')||localStorage.getItem('registroIrrigazioniV34')||localStorage.getItem('registroIrrigazioniV33')||localStorage.getItem('registroIrrigazioniV32')||localStorage.getItem('registroIrrigazioniV31')||localStorage.getItem('registroIrrigazioniV30')||localStorage.getItem('registroIrrigazioniV29')||localStorage.getItem('registroIrrigazioniV28')||localStorage.getItem('registroIrrigazioniV27')||localStorage.getItem('registroIrrigazioniV26')||localStorage.getItem('registroIrrigazioniV25')||localStorage.getItem('registroIrrigazioniV24')||localStorage.getItem('registroIrrigazioniV23')||localStorage.getItem('registroIrrigazioniV22')||localStorage.getItem('registroIrrigazioniV21')||localStorage.getItem('registroIrrigazioniV20')||localStorage.getItem('registroIrrigazioniV19')||localStorage.getItem('registroIrrigazioniV18')||localStorage.getItem('registroIrrigazioniV17')||localStorage.getItem('registroIrrigazioniV16')||localStorage.getItem('registroIrrigazioniV15')||localStorage.getItem('registroIrrigazioniV14')||localStorage.getItem('registroIrrigazioniV13')||localStorage.getItem('registroIrrigazioniV12')||localStorage.getItem('registroIrrigazioniV11')||localStorage.getItem('registroIrrigazioniV10')||localStorage.getItem('registroIrrigazioniV9')||localStorage.getItem('registroIrrigazioniV8')||localStorage.getItem('registroIrrigazioniV6');
+  if(raw){try{db=JSON.parse(raw); if(!db.campi)db.campi=[]; if(!db.irrigazioni)db.irrigazioni=[]; if(!db.pozzi)db.pozzi=[]; if(!db.piani)db.piani=[]; if(!db.concimi)db.concimi=[];}catch(e){}}
+  if(!db.piani) db.piani=[];
+  if(!Array.isArray(db.concimi)) db.concimi=[];
+  if(!db.concimi.length) db.concimi=JSON.parse(JSON.stringify(DEFAULT_CONCIMI));
+  if(!db.descrizioni) db.descrizioni=JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI));
+  if(!Array.isArray(db.descrizioni.colture)) db.descrizioni.colture=[...DEFAULT_DESCRIZIONI.colture];
+  if(!Array.isArray(db.descrizioni.varieta)) db.descrizioni.varieta=[...DEFAULT_DESCRIZIONI.varieta];
+  db.campi.forEach(c=>{if(!c.settori)c.settori=[]; c.settori=c.settori.map(sec=>{if(!sec.numeriFilari){sec.numeriFilari=filariDaVecchio(sec);} sec.filari=contaFilari(sec.numeriFilari,sec.filari); return sec;}); c.aperturaCampo=campoModalitaAuto(c);}); if(!db.pozzi) db.pozzi=[];
+  db.irrigazioni.forEach(i=>{if(!i.righe){i.righe=[{campoId:i.campoId,campoNome:i.campoNome,settoreNome:i.modo==='parziale'?'Parziale':'Tutto campo',tipoIrr:i.tipoIrr,filari:i.filariIrrigati,lungFilare:i.lungFilareIrr,superficie:i.superficie,ettari:i.ettari,litriOra:n(i.litri)/Math.max(n(i.ore),1),m3Ora:n(i.m3)/Math.max(n(i.ore),1),mmOraCampo:i.mmOraCampo,mmCampo:i.mmCampo,m3:i.m3,litri:i.litri,mmBagnato:i.mmBagnato,mmOraBagnato:i.mmOraBagnato}]; i.totali={superficie:i.superficie,ettari:i.ettari,litri:i.litri,m3:i.m3,mmCampo:i.mmCampo};}
+    // V42: assegna stagione alle vecchie irrigazioni in base all'anno della data
+    if(!i.stagione) i.stagione=annoData(i.data);
+  });
+}
+function save(opts={}){
+  db.__updatedAt=new Date().toISOString();
+  localStorage.setItem(K,JSON.stringify(db));
+  if(!opts.noAutoSync && !suppressAutoSync) scheduleAutoUpload();
+}
+let _skipExitConfirm=false;
+function nuovaIrrHaDati(){if(!document.getElementById('nuova')) return false; if(document.getElementById('nuova').classList.contains('hidden')) return false; if(righeIrr && righeIrr.length>0) return true; const ore=document.getElementById('oreIrr'); if(ore && n(ore.value)>0) return true; const note=document.getElementById('noteIrr'); if(note && note.value.trim()) return true; return false;}
+function showSection(id){const target=document.getElementById(id); if(!target){alert('Sezione non trovata: '+id); return;} if(!_skipExitConfirm && id!=='nuova' && nuovaIrrHaDati()){ if(!confirm('Stai uscendo da Nuova irrigazione senza salvarla. I dati inseriti verranno persi.\n\nVuoi uscire lo stesso?')){return;}} document.querySelectorAll('.section').forEach(s=>s.classList.add('hidden')); target.classList.remove('hidden'); const sel=document.getElementById('sezioneRapida'); if(sel) sel.value=id; window.scrollTo({top:0,behavior:'smooth'}); if(id!=='nuova'){const bn=document.getElementById('bannerCreaPiano'); if(bn) bn.classList.add('hidden'); const tt=document.getElementById('titoloNuova'); if(tt) tt.textContent='Nuova operazione';} if(id==='home')chiudiListe(); if(id==='riepilogo'){const rl=document.getElementById('riepListWrap'); if(rl){rl.classList.remove('hidden'); const b=document.getElementById('btnRiepList'); if(b) b.textContent='Chiudi tabella';}} if(id==='calendario'){renderCalendario();} renderAll()}
+function chiudiListe(){['campiListWrap','registroListWrap','riepListWrap','pozziListWrap'].forEach(id=>document.getElementById(id)?.classList.add('hidden')); ['btnCampiList','btnRegistroList','btnRiepList','btnPozziList'].forEach(id=>{let b=document.getElementById(id); if(b)b.textContent='Apri tabella'})}
+function toggleLista(id,btn){let el=document.getElementById(id), b=document.getElementById(btn); el.classList.toggle('hidden'); b.textContent=el.classList.contains('hidden')?'Apri tabella':'Chiudi tabella'; renderAll()}
+function toggleTipo(){document.getElementById('boxAla').classList.toggle('hidden',document.getElementById('tipoIrr').value!=='ala');document.getElementById('boxMicro').classList.toggle('hidden',document.getElementById('tipoIrr').value!=='micro')}
+function campoBaseFromForm(){const fil=n(filariTot.value), lung=n(lungFilare.value), interf=n(interfila.value); const sup=fil*lung*interf, ha=sup/10000, haManual=n(haManuali.value); return {fil,lung,interf,sup,haCalc:ha,haUsati:haManual>0?haManual:ha};}
+function formCampoObj(){
+  const obj={id:campoEditId.value||uid(), nome:nomeCampo.value.trim(), coltura:coltura.value.trim(), filariTot:n(filariTot.value), lungFilare:n(lungFilare.value), interfila:n(interfila.value), haManuali:n(haManuali.value), tipoIrr:tipoIrr.value, passoGoccia:n(passoGoccia.value), portataGoccia:n(portataGoccia.value)||2.3, larghezzaBagnataAla:n(larghezzaBagnataAla.value), numMicro:n(numMicro.value), portataMicro:n(portataMicro.value)||50, diametroMicro:n(diametroMicro.value), settori:settoriForm.map(s=>({...s})), note:noteCampo.value.trim()};
+  obj.aperturaCampo=campoModalitaAuto(obj);
+  if(document.getElementById('aperturaCampo')) aperturaCampo.value=obj.aperturaCampo;
+  return obj;
+}
+function calcolaCampo(c){
+  const fil=n(c.filariTot), lung=n(c.lungFilare), interf=n(c.interfila), sup=fil*lung*interf, haCalc=sup/10000, haUsati=n(c.haManuali)>0?n(c.haManuali):haCalc;
+  let litriOra=0,m3Ora=0,mmOraCampo=0,mmOraBagnato=null,dettagli='';
+  if(c.tipoIrr==='ala'){
+    const passo=n(c.passoGoccia)||0.5, port=n(c.portataGoccia)||2.3, fascia=n(c.larghezzaBagnataAla)||0;
+    const metriAla=fil*lung; const gocci=passo>0?metriAla/passo:0;
+    litriOra=gocci*port; m3Ora=litriOra/1000;
+    mmOraCampo=(interf>0&&passo>0)?port/(interf*passo):0;
+    if(fascia>0 && passo>0) mmOraBagnato=port/(fascia*passo);
+    dettagli=`Ala: ${fmt(metriAla,0)} m · ${fmt(gocci,0)} gocciolatori · passo ${fmt(passo,2)} m${fascia>0?' · fascia bagnata '+fmt(fascia,2)+' m':''}`;
+  } else {
+    const num=n(c.numMicro), port=n(c.portataMicro)||50, diam=n(c.diametroMicro)||0; litriOra=num*port; m3Ora=litriOra/1000; mmOraCampo=haUsati>0?m3Ora/haUsati/10:0; if(diam>0){const area=Math.PI*Math.pow(diam/2,2); mmOraBagnato=area>0?port/area:0; dettagli=`Micro: ${fmt(num,0)} pezzi · diametro ${fmt(diam,2)} m · area singola ${fmt(area,2)} m²`;} else dettagli=`Micro: ${fmt(num,0)} pezzi`;
+  }
+  return {sup,haCalc,haUsati,litriOra,litriMin:litriOra/60,m3Ora,mmOraCampo,mmOraBagnato,dettagli};
+}
+function aggiornaAnteprimaCampo(){
+  const b=campoBaseFromForm(); supCalc.value=b.sup?fmt(b.sup,0):''; haCalc.value=b.haCalc?fmt(b.haCalc,4):''; const c=formCampoObj(); if(document.getElementById('tipoCampoAuto')) tipoCampoAuto.value=labelCampoModalita(c); const r=calcolaCampo(c); let html=`<div><span class="pill">Superficie ${fmt(r.sup,0)} m²</span><span class="pill">Ettari usati ${fmt(r.haUsati,4)}</span><span class="pill">Campo ${labelCampoModalita(c)}</span></div>`; html+=`<div class="big-result">${fmt(r.mmOraCampo,2)} mm/ora sul campo</div>`; html+=`<div>${fmt(r.litriOra,0)} L/ora · ${fmt(r.m3Ora,2)} m³/ora</div><div class="small">${r.dettagli}</div>`; if(r.mmOraBagnato!==null) html+=`<div style="margin-top:8px"><span class="pill">${c.tipoIrr==='ala'?'Fascia bagnata ala':'Zona bagnata micro'} ${fmt(r.mmOraBagnato,2)} mm/ora</span></div>`; if(settoriForm.length){ html+=htmlReportFilariCampo(filariMaxCampo(),settoriForm); html+=`<div class="small" style="margin-top:8px">Settori salvati nel campo: ${settoriForm.map(s=>esc(s.nome)+' — filari '+labelFilariNumeri(s.numeriFilari,s.filari)).join(' · ')}</div>`;} anteprimaCampo.innerHTML=html;
+  if(document.getElementById('settoreConta')) settoreConta.textContent='Totale filari: '+contaFilari(settoreNumeri.value);
+}
+function resetSettoreForm(){settoreEditIndex.value=''; settoreNome.value=''; settoreNumeri.value=''; settoreLung.value=''; settoreMicro.value=''; if(document.getElementById('settoreConta')) settoreConta.textContent='Totale filari selezionati: 0'; renderSettorePicker();}
+function aggiungiSettoreForm(){
+  const numeri=settoreNumeri.value.trim();
+  const fil=contaFilari(numeri);
+  const s={id:uid(), nome:settoreNome.value.trim(), numeriFilari:numeri, filari:fil, lungFilare:n(settoreLung.value)||n(lungFilare.value), micro:n(settoreMicro.value)};
+  if(!s.nome){alert('Inserisci nome settore o varietà');return}
+  if(!s.numeriFilari||!s.filari){alert('Seleziona i numeri dei filari della varietà. Esempio Bigarò: tocca 1, 5, 6.');return}
+  const max=filariMaxCampo();
+  const arr=parseFilari(s.numeriFilari);
+  const fuori=arr.filter(x=>x<1||x>max);
+  if(fuori.length){alert('Questi filari non esistono nel campo: '+fuori.join(', ')+'. Il campo ha '+max+' filari.');return}
+  const idx=settoreEditIndex.value===''?-1:parseInt(settoreEditIndex.value);
+  const usati=filariUsatiSettori(idx);
+  const doppi=arr.filter(x=>usati.has(x));
+  if(doppi.length){alert('Questi filari sono già assegnati ad altra varietà: '+doppi.join(', ')+'. Prima modifica o elimina la varietà che li contiene.'); return;}
+  if(idx>=0){s.id=settoriForm[idx].id; settoriForm[idx]=s;} else settoriForm.push(s);
+  resetSettoreForm(); renderSettoriForm(); aggiornaAnteprimaCampo();
+}
+function editSettoreForm(i){const s=settoriForm[i]; settoreEditIndex.value=i; settoreNome.value=s.nome||''; settoreNumeri.value=s.numeriFilari||filariDaVecchio(s)||''; const arr=parseFilari(settoreNumeri.value); settoreLung.value=s.lungFilare||''; settoreMicro.value=s.micro||''; if(document.getElementById('settoreConta')) settoreConta.textContent='Totale filari selezionati: '+contaFilari(settoreNumeri.value,s.filari); renderSettorePicker();}
+function delSettoreForm(i){if(!confirm('Eliminare questo settore/varietà?'))return; settoriForm.splice(i,1); renderSettoriForm(); aggiornaAnteprimaCampo();}
+function renderSettoriForm(){listaSettoriForm.innerHTML=settoriForm.length?htmlReportFilariCampo(filariMaxCampo(),settoriForm)+`<div class="notice ok"><b>${settoriForm.length} settore/i pronti da salvare nel campo.</b><br>Quando premi “Salva campo”, questi settori vengono collegati al campo.</div>`+settoriForm.map((s,i)=>`<div class="item"><div class="item-title">${esc(s.nome)}</div><div class="item-meta">Filari ${labelFilariNumeri(s.numeriFilari,s.filari)} · Lunghezza ${fmt(s.lungFilare,0)} m${s.micro?` · Micro ${fmt(s.micro,0)}`:''}</div><div class="item-actions"><button onclick="editSettoreForm(${i})">Modifica</button><button class="danger" onclick="delSettoreForm(${i})">Elimina</button></div></div>`).join(''):'<div class="notice">Nessun settore/varietà inserito. Scrivi il nome varietà, tocca i numeri filari che le appartengono e premi <b>Salva settore nel campo</b>. Alla fine premi <b>Salva campo</b>.</div>';}
+function settoreFormHaDati(){return settoreNome.value.trim() || settoreNumeri.value.trim() || n(settoreLung.value) || n(settoreMicro.value)}
+function acquisisciSettoreInSospeso(){ if(!settoreFormHaDati()) return true; const nome=settoreNome.value.trim(); const fil=contaFilari(settoreNumeri.value); if(!nome && !fil) return true; if(!nome){alert('Hai scritto dati settore ma manca il nome settore/varietà.'); return false} if(!fil){alert('Hai scritto dati settore ma mancano i filari selezionati. Tocca i numeri filari della varietà.'); return false} aggiungiSettoreForm(); return true; }
+function autoAggiungiDescrizione(tipo, valore){
+  const v=cleanDescrizione(valore); if(!v) return false;
+  if(!db.descrizioni) db.descrizioni=JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI));
+  if(!Array.isArray(db.descrizioni[tipo])) db.descrizioni[tipo]=[];
+  const arr=db.descrizioni[tipo];
+  if(arr.some(x=>cleanDescrizione(x).toLowerCase()===v.toLowerCase())) return false;
+  arr.push(v); arr.sort((a,b)=>a.localeCompare(b,'it'));
+  return true;
+}
+function salvaCampo(){ if(!acquisisciSettoreInSospeso())return; const c=formCampoObj(); if(!c.nome){alert('Inserisci nome campo');return} if(!c.filariTot||!c.lungFilare||!c.interfila){alert('Inserisci filari totali, lunghezza filare e interfila');return} if(c.tipoIrr==='micro'&&!c.numMicro){alert('Inserisci numero micro spruzzi');return} c.settori=settoriForm.map(s=>({...s})); const rep=reportFilariSettori(c.filariTot,c.settori); if(rep.doppi.length){alert('Non posso salvare: ci sono filari assegnati due volte: '+rep.doppi.join(', ')); return;} if(c.settori.length && rep.mancanti.length && !confirm('Attenzione: mancano ancora questi filari senza varietà: '+rep.mancanti.join(', ')+'. Vuoi salvare lo stesso?')) return;
+  // V41: aggiunge automaticamente coltura e varietà nuove alle descrizioni
+  let nuoveDesc=0;
+  if(autoAggiungiDescrizione('colture', c.coltura)) nuoveDesc++;
+  c.settori.forEach(s=>{ if(autoAggiungiDescrizione('varieta', s.nome)) nuoveDesc++; });
+  const i=db.campi.findIndex(x=>x.id===c.id); if(i>=0)db.campi[i]=c; else db.campi.push(c); save(); alert('Campo salvato con '+c.settori.length+' settore/i. Filari assegnati: '+rep.assegnati.length+' su '+Math.floor(n(c.filariTot))+'.'+(nuoveDesc?'\n\n'+nuoveDesc+' nuova/e descrizione/i aggiunta/e automaticamente.':'')); resetCampoForm(); renderAll(); campiListWrap.classList.remove('hidden'); btnCampiList.textContent='Chiudi tabella';}
+function resetCampoForm(){['campoEditId','nomeCampo','coltura','filariTot','lungFilare','interfila','haManuali','larghezzaBagnataAla','numMicro','noteCampo'].forEach(id=>document.getElementById(id).value=''); tipoIrr.value='ala'; if(document.getElementById('aperturaCampo')) aperturaCampo.value='totale'; if(document.getElementById('tipoCampoAuto')) tipoCampoAuto.value='Calcolo automatico in base ai filari inseriti'; passoGoccia.value='0.5'; portataGoccia.value='2.3'; portataMicro.value='50'; diametroMicro.value='5'; settoriForm=[]; resetSettoreForm(); toggleTipo(); renderSettoriForm(); aggiornaAnteprimaCampo();}
+function editCampo(id){const c=db.campi.find(x=>x.id===id); if(!c)return; showSection('campi'); campoEditId.value=c.id; nomeCampo.value=c.nome||''; coltura.value=c.coltura||''; filariTot.value=c.filariTot||''; lungFilare.value=c.lungFilare||''; interfila.value=c.interfila||''; haManuali.value=c.haManuali||''; tipoIrr.value=c.tipoIrr||'ala'; if(document.getElementById('aperturaCampo')) aperturaCampo.value=campoModalitaAuto(c); if(document.getElementById('tipoCampoAuto')) tipoCampoAuto.value=labelCampoModalita(c); passoGoccia.value=c.passoGoccia||0.5; portataGoccia.value=c.portataGoccia||2.3; larghezzaBagnataAla.value=c.larghezzaBagnataAla||''; numMicro.value=c.numMicro||''; portataMicro.value=c.portataMicro||50; diametroMicro.value=c.diametroMicro||5; noteCampo.value=c.note||''; settoriForm=(c.settori||[]).map(s=>({...s})); toggleTipo(); renderSettoriForm(); aggiornaAnteprimaCampo();
+  // V42: mostra storico campo in fondo all'anteprima
+  const ap=document.getElementById('anteprimaCampo'); if(ap){ap.innerHTML += htmlStoricoCampo(c.id);}
+}
+function delCampo(id){if(!confirm('Eliminare questo campo?'))return; db.campi=db.campi.filter(x=>x.id!==id); save(); renderAll()}
+function duplicaCampo(id){
+  const c=db.campi.find(x=>x.id===id); if(!c)return;
+  const copia=JSON.parse(JSON.stringify(c));
+  copia.id=uid(); copia.nome=(c.nome||'Campo')+' copia';
+  copia.settori=(copia.settori||[]).map(s=>({...s,id:uid()}));
+  db.campi.push(copia); save(); renderAll(); editCampo(copia.id);
+  alert('Campo duplicato. Controlla il nome e modifica quello che serve, poi premi Salva campo.');
+}
+function statoCampoFilari(c){
+  const max=Math.max(0,Math.floor(n(c?.filariTot)));
+  const settori=c?.settori||[];
+  if(!max || !settori.length) return {cls:'stato-nuovo', label:'Nessun settore assegnato'};
+  const r=reportFilariSettori(max,settori);
+  if(r.doppi.length) return {cls:'stato-warn', label:'Filari doppi: '+r.doppi.join(', ')};
+  if(r.mancanti.length) return {cls:'stato-warn', label:'Mancano '+r.mancanti.length+' filari'};
+  return {cls:'stato-ok', label:'Tutti i filari assegnati ('+r.assegnati.length+'/'+max+')'};
+}
+function ultimaIrrigazioneCampo(campoId){
+  let ultima=null;
+  (db.irrigazioni||[]).forEach(i=>{
+    if((i.righe||[]).some(r=>r.campoId===campoId)){
+      if(!ultima || (i.data||'') > (ultima.data||'')) ultima=i;
+    }
+  });
+  return ultima;
+}
+function storicoIrrigazioniCampo(campoId, stagione=null){
+  const arr=(db.irrigazioni||[]).filter(i=>{
+    if(!(i.righe||[]).some(r=>r.campoId===campoId)) return false;
+    if(stagione && stagioneDi(i)!==stagione) return false;
+    return true;
+  }).sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  return arr;
+}
+function htmlStoricoCampo(campoId){
+  if(!campoId) return '';
+  const arr=storicoIrrigazioniCampo(campoId, stagioneAttiva);
+  if(!arr.length) return '<div class="storico-box"><h3>Storico irrigazioni stagione '+stagioneAttiva+'</h3><div class="small">Nessuna irrigazione registrata per questo campo nella stagione '+stagioneAttiva+'.</div></div>';
+  let totOre=0, totM3=0, totMm=0, totLitri=0;
+  const righe=arr.map(i=>{
+    const rd=(i.righe||[]).filter(r=>r.campoId===campoId);
+    let ore=n(i.ore), m3=0, mm=0, litri=0;
+    rd.forEach(r=>{m3+=n(r.m3); mm+=n(r.mmCampo); litri+=n(r.litri);});
+    totOre+=ore; totM3+=m3; totMm+=mm; totLitri+=litri;
+    const settori=[...new Set(rd.map(r=>r.settoreNome))].join(', ');
+    return `<div class="storico-rig"><b>${formatDataIT(i.data)}</b> · ${fmt(ore,2)} ore · ${fmt(mm,2)} mm · ${fmt(m3,2)} m³<br><span class="small">${esc(settori)}</span></div>`;
+  }).join('');
+  return `<div class="storico-box"><h3>Storico irrigazioni stagione ${stagioneAttiva}</h3>${righe}<div class="storico-tot">Totale stagione: ${arr.length} irrigazioni · ${fmt(totOre,2)} ore · ${fmt(totMm,2)} mm · ${fmt(totM3,2)} m³ · ${fmt(totLitri,0)} L</div></div>`;
+}
+function renderCampi(){const q=(cercaCampi?.value||'').toLowerCase(); let arr=db.campi.filter(c=>JSON.stringify(c).toLowerCase().includes(q)); listaCampi.innerHTML=arr.length?arr.map(c=>{let r=calcolaCampo(c); let sett=(c.settori||[]).length?`<br>Settori: ${(c.settori||[]).map(s=>esc(s.nome)+' — filari '+labelFilariNumeri(s.numeriFilari,s.filari)).join(' · ')}`:''; const st=statoCampoFilari(c); const ulti=ultimaIrrigazioneCampo(c.id); let ultiHtml=''; if(ulti){ const g=giorniDa(ulti.data); const warn=(g!==null && g>14)?' ultima-warn':''; ultiHtml=`<div class="ultima-irr${warn}">Ultima irrigazione: ${formatDataIT(ulti.data)} (${testoGiorniDa(g)})</div>`;} else { ultiHtml=`<div class="ultima-irr">Mai irrigato in questa app</div>`;} return `<div class="item"><div class="item-title"><span class="stato-pallino ${st.cls}" title="${esc(st.label)}"></span>${esc(c.nome)}</div><div><span class="pill">${esc(c.coltura||'')}</span><span class="pill">${c.tipoIrr==='ala'?'Ala gocciolante':'Micro spruzzi'}</span></div><div class="item-meta">Campo calcolato: ${labelCampoModalita(c)}<br>Filari ${fmt(c.filariTot,0)} · Lunghezza ${fmt(c.lungFilare,0)} m · Interfila ${fmt(c.interfila,2)} m<br>Ha usati ${fmt(r.haUsati,4)} · <b>${fmt(r.litriMin,1)} L/min</b> · ${fmt(r.mmOraCampo,2)} mm/ora campo · ${fmt(r.m3Ora,2)} m³/ora${r.mmOraBagnato!==null?'<br>'+(c.tipoIrr==='ala'?'Fascia bagnata ala ':'Micro zona bagnata ')+fmt(r.mmOraBagnato,2)+' mm/ora':''}${sett}</div>${ultiHtml}<div class="item-actions"><button onclick="editCampo('${c.id}')">Modifica</button><button class="secondary" onclick="duplicaCampo('${c.id}')">Duplica</button><button class="danger" onclick="delCampo('${c.id}')">Elimina</button></div></div>`}).join(''):'<div class="notice">Nessun campo salvato.</div>'}
+function getCampoSel(){return db.campi.find(c=>c.id===campoIrr.value)}
+function campoIrrChanged(){const c=getCampoSel(); if(c){lungFilareIrr.value=c.lungFilare||''; if((c.settori||[]).length){modoRiga.value='settori'} else {modoRiga.value='tutti'}} else {if(document.getElementById('boxSettoriIrr')) boxSettoriIrr.innerHTML='<div class="notice">Scegli un campo da aggiungere alla irrigazione.</div>'; if(document.getElementById('boxParziale')) boxParziale.classList.add('hidden');} toggleModoRiga(); aggiornaCalcoloRapido();}
+function toggleModoRiga(){const m=modoRiga.value; boxParziale.classList.toggle('hidden',m!=='parziale'); boxSettoriIrr.classList.toggle('hidden',m!=='settori'); if(m==='parziale') renderIrrPicker(); renderSettoriIrr(); aggiornaAnteprimaIrr();}
+function renderSettoriIrr(){
+  const c=getCampoSel();
+  if(!c){boxSettoriIrr.innerHTML='<div class="notice">Scegli un campo da aggiungere alla irrigazione.</div>';return}
+  const sett=c.settori||[];
+  if(!sett.length){boxSettoriIrr.innerHTML=`<div class="notice">Questo campo non ha ancora settori/varietà salvati.<br><b>Qui non si inseriscono settori nuovi:</b> questa schermata serve solo per fare l'irrigazione.<br>Per ora puoi usare “Tutti i filari” oppure “Solo alcuni filari manuale”.<br>Per aggiungere Bigarò/Early/Ferrovia vai dalla Home in <b>Campi / Impianti</b>, aggiungi i settori e premi <b>Salva campo</b>.</div>`;return}
+  boxSettoriIrr.innerHTML=`<b>Spunta i settori / varietà irrigati</b><div class="small" style="margin-top:4px">Campo selezionato: <b>${esc(c.nome)}</b> · ${sett.length} settori salvati</div><div class="sector-actions"><button class="secondary" onclick="selezionaTuttiSettori(true)">Seleziona tutti</button><button class="gray" onclick="selezionaTuttiSettori(false)">Togli spunte</button></div>`+sett.map(s=>`<label class="checkline"><input type="checkbox" class="settCheck" value="${s.id}" onchange="aggiornaAnteprimaIrr()"><span><b>${esc(s.nome)}</b><br><span class="small">Filari ${labelFilariNumeri(s.numeriFilari,s.filari)} · lunghezza filare ${fmt(s.lungFilare,0)} m${s.micro?` · micro ${fmt(s.micro,0)}`:''}</span></span></label>`).join('');
+}
+function selezionaTuttiSettori(val){document.querySelectorAll('.settCheck').forEach(x=>x.checked=val); aggiornaAnteprimaIrr();}
+function calcRiga(c, nome, fil, lung, microSpecifico, numeriFilari=''){const ore=n(document.getElementById('oreIrr')?.value); const sup=fil*lung*n(c.interfila), ha=sup/10000; let litriOra=0,m3Ora=0,mmOraCampo=0,mmOraBagnato=null;
+  if(c.tipoIrr==='ala'){
+    const passo=n(c.passoGoccia)||0.5, port=n(c.portataGoccia)||2.3, fascia=n(c.larghezzaBagnataAla)||0;
+    const gocci=(fil*lung)/passo; litriOra=gocci*port; m3Ora=litriOra/1000;
+    mmOraCampo=(n(c.interfila)>0&&passo>0)?port/(n(c.interfila)*passo):0;
+    if(fascia>0&&passo>0) mmOraBagnato=port/(fascia*passo);
+  }
+  else {const port=n(c.portataMicro)||50; let microUsati=n(microSpecifico); if(!microUsati){const totalFil=n(c.filariTot)||1; microUsati=n(c.numMicro)*(fil/totalFil);} litriOra=microUsati*port; m3Ora=litriOra/1000; mmOraCampo=ha>0?m3Ora/ha/10:0; const diam=n(c.diametroMicro), area=Math.PI*Math.pow(diam/2,2); if(diam>0)mmOraBagnato=port/area;}
+  return {id:uid(), campoId:c.id, campoNome:c.nome, settoreNome:nome, tipoIrr:c.tipoIrr, filari:fil, numeriFilari:numeriFilari, lungFilare:lung, superficie:sup, ettari:ha, litriOra, litriMin:litriOra/60, m3Ora, mmOraCampo, mmCampo:mmOraCampo*ore, litri:litriOra*ore, m3:m3Ora*ore, mmOraBagnato, mmBagnato:mmOraBagnato!==null?mmOraBagnato*ore:null};}
+function aggiungiRigheIrrigazione(){const c=getCampoSel(); if(!c){alert('Seleziona un campo');return} const m=modoRiga.value; let aggiunte=[]; if(m==='tutti'){let numeri=`1-${n(c.filariTot)}`; aggiunte.push(calcRiga(c,'Tutto campo',n(c.filariTot),n(c.lungFilare),null,numeri));}
+  if(m==='parziale'){const numeri=numeriFilariIrr.value.trim(); const fil=contaFilari(numeri); const lung=n(lungFilareIrr.value); if(!fil||!lung){alert('Inserisci i numeri dei filari irrigati e la lunghezza filare irrigata');return} aggiunte.push(calcRiga(c,'Parziale',fil,lung,null,numeri));}
+  if(m==='settori'){const checked=[...document.querySelectorAll('.settCheck:checked')].map(x=>x.value); if(!checked.length){alert('Seleziona almeno un settore/varietà');return} (c.settori||[]).filter(s=>checked.includes(s.id)).forEach(s=>aggiunte.push(calcRiga(c,s.nome,contaFilari(s.numeriFilari,s.filari),n(s.lungFilare)||n(c.lungFilare),n(s.micro),s.numeriFilari||'')));}
+  righeIrr.push(...aggiunte);
+  if(document.getElementById('statusAggiuntaIrr')){statusAggiuntaIrr.classList.remove('hidden'); statusAggiuntaIrr.classList.add('ok'); statusAggiuntaIrr.innerHTML='<b>Aggiunto:</b> '+esc(c.nome)+' · '+aggiunte.length+' riga/e. Ora puoi scegliere un altro campo e premere di nuovo Aggiungi, oppure salvare l’irrigazione.';}
+  if(document.getElementById('campoIrr')) campoIrr.value='';
+  if(document.getElementById('numeriFilariIrr')) numeriFilariIrr.value='';
+  if(document.getElementById('lungFilareIrr')) lungFilareIrr.value='';
+  renderRigheIrr(); renderSettoriIrr(); renderIrrPicker(); aggiornaAnteprimaIrr();}
+function delRigaIrr(i){righeIrr.splice(i,1); renderRigheIrr(); aggiornaAnteprimaIrr();}
+function filariTxt(r){return labelFilariNumeri(r.numeriFilari,r.filari)}
+function filariNumeriArrayDaRighe(righe){
+  const set=new Set();
+  (righe||[]).forEach(r=>parseFilari(r.numeriFilari).forEach(x=>set.add(x)));
+  return [...set].sort((a,b)=>a-b);
+}
+function tipoIrrigazioneCampoDaRighe(campoId, righe){
+  const campo=db.campi.find(c=>c.id===campoId);
+  const filTot=n(campo?.filariTot);
+  const nums=filariNumeriArrayDaRighe(righe);
+  if(filTot && nums.length===filTot && nums[0]===1 && nums[nums.length-1]===filTot) return 'Totale';
+  return 'Parziale';
+}
+function descrizioneIrrigazione(irr){
+  const data=formatDataIT(irr.data);
+  const righe=irr.righe||[];
+  const gruppi={};
+  righe.forEach(r=>{if(!gruppi[r.campoId])gruppi[r.campoId]=[]; gruppi[r.campoId].push(r)});
+  const parti=Object.entries(gruppi).map(([campoId,rs])=>{
+    const nome=rs[0]?.campoNome||'Campo';
+    return `${nome} ${tipoIrrigazioneCampoDaRighe(campoId,rs)}`;
+  });
+  let prefisso='';
+  if(irr.tipoOperazione==='concimazione') prefisso=(irr.metodo||'Concimazione')+' · ';
+  return `${data} ${prefisso}${parti.join(' + ')}`;
+}
+function renderRigheIrr(){
+  const campiUnici=[...new Set(righeIrr.map(r=>r.campoNome))];
+  const intestazione=righeIrr.length?`<div class="notice ok"><b>${campiUnici.length} campo/i aggiunti</b> · ${righeIrr.length} riga/e settore. Puoi continuare ad aggiungere altri campi prima di salvare.</div>`:'';
+  listaRigheIrr.innerHTML=righeIrr.length?intestazione+righeIrr.map((r,i)=>`<div class="item"><div class="item-title">${esc(r.campoNome)} · ${esc(r.settoreNome)}</div><div class="item-meta">Filari ${filariTxt(r)} · Lunghezza ${fmt(r.lungFilare,0)} m · Superficie ${fmt(r.superficie,0)} m²<br>${fmt(r.mmOraCampo,2)} mm/ora campo · ${r.mmOraBagnato!==null?'<br>'+(r.tipoIrr==='ala'?'Fascia bagnata ala ':'Zona bagnata micro ')+fmt(r.mmOraBagnato,2)+' mm/ora · ':''}${fmt(r.m3Ora,2)} m³/ora · <b>${fmt(r.litriMin,1)} L/min</b></div><div class="item-actions"><button class="danger" onclick="delRigaIrr(${i})">Elimina riga</button></div></div>`).join(''):'<div class="notice">Nessun campo aggiunto. Scegli un campo, spunta le varietà/settori e premi “Aggiungi campo/settori alla irrigazione”. Puoi ripetere l’operazione per tutti i campi che stai irrigando insieme.</div>';
+}
+function acquaBottiTotale(){const nb=n(document.getElementById('nBotti')?.value); const lb=n(document.getElementById('litriBotte')?.value)||1000; return nb*lb;}
+function calcTotaliIrr(){
+  const acqua=operazioneHaAcqua();
+  let superficie=0,ettari=0,litriOra=0,m3Ora=0,litri=0,m3=0,mmCampo=0,litriMin=0;
+  righeIrr.forEach(r=>{superficie+=n(r.superficie); ettari+=n(r.ettari); litriOra+=n(r.litriOra); m3Ora+=n(r.m3Ora);});
+  if(acqua==='impianto'){
+    const ore=n(document.getElementById('oreIrr')?.value);
+    litri=litriOra*ore; m3=m3Ora*ore; mmCampo=ettari>0?m3/ettari/10:0; litriMin=litriOra/60;
+    return {acqua,ore,superficie,ettari,litriOra,litriMin,m3Ora,litri,m3,mmCampo,mmOraCampo:ore>0?mmCampo/ore:0};
+  } else if(acqua==='botte'){
+    litri=acquaBottiTotale(); m3=litri/1000; mmCampo=ettari>0?m3/ettari/10:0;
+    return {acqua,ore:0,superficie,ettari,litriOra:0,litriMin:0,m3Ora:0,litri,m3,mmCampo,mmOraCampo:0};
+  } else {
+    return {acqua:'no',ore:0,superficie,ettari,litriOra:0,litriMin:0,m3Ora:0,litri:0,m3:0,mmCampo:0,mmOraCampo:0};
+  }
+}
+function aggiornaAnteprimaIrr(){
+  if(!document.getElementById('anteprimaIrr'))return;
+  const acqua=operazioneHaAcqua(); const conc=operazioneHaConcime(); const t=calcTotaliIrr();
+  const campiUnici=[...new Set(righeIrr.map(r=>r.campoNome))];
+  // riquadro mm in tempo reale sotto lo slider
+  const mmBox=document.getElementById('mmLive');
+  if(mmBox){
+    if(acqua==='impianto'){
+      if(!righeIrr.length){ mmBox.className='mm-live vuoto'; mmBox.innerHTML='Aggiungi un campo qui sotto per vedere i mm d\'acqua in base alle ore.'; }
+      else {
+        const ore=n(document.getElementById('oreIrr')?.value);
+        let sommaBagnato=0, contaBagnato=0; const senzaFascia=[];
+        righeIrr.forEach(r=>{ if(r.mmOraBagnato!==null && r.mmOraBagnato!==undefined && n(r.mmOraBagnato)>0){ sommaBagnato+=n(r.mmOraBagnato); contaBagnato++; } else { senzaFascia.push(r.campoNome); } });
+        mmBox.className='mm-live';
+        if(contaBagnato>0 && senzaFascia.length===0){
+          const mmBagnato=(sommaBagnato/contaBagnato)*ore;
+          const etichetta = righeIrr.some(r=>r.tipoIrr==='micro') ? 'acqua reale sulla zona bagnata' : 'acqua reale sulla fascia bagnata';
+          mmBox.innerHTML=`<div class="big">${fmt(mmBagnato,1)}<small>mm</small></div><div class="det">${etichetta} · ${fmt(t.m3,2)} m³ · ${fmt(t.litri,0)} L</div><div class="det" style="margin-top:2px">${fmt(t.mmCampo,2)} mm medi sul campo</div>`;
+        } else if(contaBagnato>0 && senzaFascia.length>0){
+          const mmBagnato=(sommaBagnato/contaBagnato)*ore;
+          const campiSenza=[...new Set(senzaFascia)].join(', ');
+          mmBox.innerHTML=`<div class="big">${fmt(mmBagnato,1)}<small>mm</small></div><div class="det">acqua sulla fascia bagnata (solo dei campi con fascia impostata)</div><div class="det" style="margin-top:4px;color:#b3681b">⚠️ Senza larghezza fascia: ${esc(campiSenza)} — impostala nel campo per il calcolo esatto.</div>`;
+        } else {
+          const campiSenza=[...new Set(senzaFascia)].join(', ');
+          mmBox.innerHTML=`<div class="big">${fmt(t.mmCampo,2)}<small>mm</small></div><div class="det">acqua media sul campo · ${fmt(t.m3,2)} m³ · ${fmt(t.litri,0)} L</div><div class="det" style="margin-top:4px;color:#b3681b">⚠️ Per vedere i mm sulla fascia bagnata, imposta la "larghezza fascia bagnata" in: ${esc(campiSenza)} (sezione Campi).</div>`;
+        }
+      }
+    } else { mmBox.className='mm-live vuoto'; mmBox.style.display='none'; }
+    if(acqua==='impianto') mmBox.style.display='';
+  }
+  let html='';
+  if(!righeIrr.length){ anteprimaIrr.innerHTML='<div class="notice">Aggiungi uno o più campi all\'operazione.</div>'; return; }
+  html+=`<div><span class="pill">Campi ${campiUnici.length}</span><span class="pill">${fmt(t.superficie,0)} m²</span><span class="pill">${fmt(t.ettari,4)} ha</span></div>`;
+  if(acqua==='impianto'){
+    html+=`<div class="big-result">${fmt(t.mmCampo,2)} mm medi</div><div>${fmt(t.m3,2)} m³ · ${fmt(t.litri,0)} L · ${fmt(t.mmOraCampo,2)} mm/ora</div><div style="margin-top:8px"><span class="pill">Richiesta impianto ${fmt(t.litriMin,1)} L/min</span></div>`;
+    html+=renderSuggerimentoPozzi(t.litriMin);
+  } else if(acqua==='botte'){
+    html+=`<div class="big-result">${fmt(t.litri,0)} L d'acqua (botti)</div><div>${fmt(t.m3,2)} m³ · ${fmt(t.mmCampo,2)} mm medi</div>`;
+  }
+  if(conc){
+    const u=totaliConcimeMiscela();
+    if(miscelaIrr.length){
+      html+=`<div style="margin-top:8px"><span class="tag-method tag-conc">${esc(metodoCorrente())}</span></div>`;
+      html+=`<div style="margin-top:4px"><b>Concime — unità/ha:</b> <span class="pill">N ${fmt(u.n,1)}</span><span class="pill">P ${fmt(u.p,1)}</span><span class="pill">K ${fmt(u.k,1)}</span><span class="pill">Mg ${fmt(u.mg,1)}</span><span class="pill">Ca ${fmt(u.ca,1)}</span></div>`;
+    } else {
+      html+='<div class="notice" style="margin-top:8px">Aggiungi almeno un concime nel blocco "Concime distribuito".</div>';
+    }
+  }
+  anteprimaIrr.innerHTML=html;
+}
+function salvaIrrigazione(){
+  const tipo=tipoOperazioneCorrente(); const metodo=metodoCorrente(); const acqua=operazioneHaAcqua();
+  if(!righeIrr.length){alert('Aggiungi almeno un campo/settore all\'operazione');return}
+  if(acqua==='impianto' && !n(oreIrr.value)){alert('Inserisci le ore di irrigazione');return}
+  if(acqua==='botte' && !acquaBottiTotale()){alert('Inserisci il numero di botti usate');return}
+  if(tipo==='concimazione' && !miscelaIrr.length){alert('Hai scelto una concimazione: aggiungi almeno un concime nel blocco "Concime distribuito".');return}
+  const id=irrEditId.value||uid(); const t=calcTotaliIrr();
+  const ore=n(oreIrr.value);
+  let righe;
+  if(acqua==='impianto'){
+    righe=righeIrr.map(r=>({...r, litri:n(r.litriOra)*ore, m3:n(r.m3Ora)*ore, mmCampo:n(r.mmOraCampo)*ore, mmBagnato:r.mmOraBagnato!==null?n(r.mmOraBagnato)*ore:null}));
+  } else if(acqua==='botte'){
+    const ettTot=t.ettari||1;
+    righe=righeIrr.map(r=>{const quota=n(r.ettari)/ettTot; const litri=t.litri*quota; const m3=litri/1000; const mm=n(r.ettari)>0?m3/n(r.ettari)/10:0; return {...r, litriOra:0,m3Ora:0,mmOraCampo:0, litri, m3, mmCampo:mm, mmBagnato:null};});
+  } else {
+    righe=righeIrr.map(r=>({...r, litriOra:0,m3Ora:0,mmOraCampo:0, litri:0, m3:0, mmCampo:0, mmBagnato:null}));
+  }
+  const nomi=[...new Set(righe.map(r=>r.campoNome))]; const dataFinale=dataIrr.value||today();
+  // concime
+  let concime=null;
+  if(tipo==='concimazione' && miscelaIrr.length){
+    const ettTot=t.ettari||0; const u=totaliConcimeMiscela();
+    const prodotti=miscelaIrr.map(m=>({...m, totaleKg:n(m.totaleKg)>0?n(m.totaleKg):(ettTot>0?m.dose*ettTot:0)}));
+    concime={metodo, prodotti, n:u.n, p:u.p, k:u.k, mg:u.mg, ca:u.ca};
+  }
+  const irr={
+    id, data:dataFinale, stagione:annoData(dataFinale),
+    tipoOperazione:tipo, metodo: tipo==='concimazione'?metodo:'', acqua,
+    nBotti: acqua==='botte'?n(document.getElementById('nBotti').value):0,
+    litriBotte: acqua==='botte'?(n(document.getElementById('litriBotte').value)||1000):0,
+    fileBotte: acqua==='botte'?n(document.getElementById('fileBotte').value):0,
+    ore: acqua==='impianto'?ore:0,
+    campoNome:nomi.join(' + '), righe, totali:t, concime, note:noteIrr.value.trim()
+  };
+  const i=db.irrigazioni.findIndex(y=>y.id===id); if(i>=0)db.irrigazioni[i]=irr; else db.irrigazioni.push(irr);
+  save(); _skipExitConfirm=true; resetIrrForm(); renderAll(); showSection('registro'); _skipExitConfirm=false; registroListWrap.classList.remove('hidden'); btnRegistroList.textContent='Chiudi tabella';
+}
+function resetIrrForm(){irrEditId.value=''; dataIrr.value=today(); oreIrr.value=''; noteIrr.value=''; righeIrr=[]; miscelaIrr=[]; if(document.getElementById('tipoOperazione')) tipoOperazione.value='irrigazione'; if(document.getElementById('metodoConc')) metodoConc.value='Fertirrigazione'; if(document.getElementById('nBotti')) nBotti.value=''; if(document.getElementById('fileBotte')) fileBotte.value=''; if(document.getElementById('litriBotte')) litriBotte.value='1000'; if(document.getElementById('concKgTot')) concKgTot.value=''; if(document.getElementById('concDoseHa')) concDoseHa.value=''; if(document.getElementById('numeriFilariIrr')) numeriFilariIrr.value=''; if(document.getElementById('contaFilariIrr')) contaFilariIrr.textContent='Totale filari selezionati: 0'; lungFilareIrr.value=''; if(document.getElementById('statusAggiuntaIrr')) statusAggiuntaIrr.classList.add('hidden'); if(document.getElementById('sliderOre')) document.getElementById('sliderOre').value='5'; aggiornaSliderFill(); toggleTipoOperazione(); renderMiscelaIrr(); renderRigheIrr(); campoIrrChanged(); renderIrrPicker(); aggiornaAnteprimaIrr();}
+function editIrr(id){const y=db.irrigazioni.find(i=>i.id===id); if(!y)return; showSection('nuova'); irrEditId.value=y.id; dataIrr.value=y.data; noteIrr.value=y.note||''; righeIrr=(y.righe||[]).map(r=>({...r,id:uid()}));
+  const tipo=y.tipoOperazione||'irrigazione';
+  if(document.getElementById('tipoOperazione')) tipoOperazione.value=tipo;
+  if(document.getElementById('metodoConc') && y.metodo) metodoConc.value=y.metodo;
+  oreIrr.value=y.ore||'';
+  if(document.getElementById('nBotti')) nBotti.value=y.nBotti||'';
+  if(document.getElementById('fileBotte')) fileBotte.value=y.fileBotte||'';
+  if(document.getElementById('litriBotte')) litriBotte.value=y.litriBotte||1000;
+  miscelaIrr = (y.concime&&y.concime.prodotti)?y.concime.prodotti.map(p=>({...p})):[];
+  toggleTipoOperazione(); sincronizzaSliderOre(); renderMiscelaIrr(); renderRigheIrr(); aggiornaAnteprimaIrr();
+}
+function delIrr(id){if(!confirm('Eliminare questa irrigazione?'))return; db.irrigazioni=db.irrigazioni.filter(x=>x.id!==id); save(); renderAll()}
+function duplicaIrr(id){
+  const y=db.irrigazioni.find(i=>i.id===id); if(!y)return;
+  showSection('nuova');
+  irrEditId.value='';
+  dataIrr.value=today();
+  oreIrr.value=y.ore||'';
+  noteIrr.value=y.note?('Duplicata da '+formatDataIT(y.data)+' - '+y.note):('Duplicata da '+formatDataIT(y.data));
+  righeIrr=(y.righe||[]).map(r=>({...r,id:uid()}));
+  renderRigheIrr(); aggiornaAnteprimaIrr();
+  alert('Irrigazione duplicata in bozza. Controlla data/ore e premi Salva irrigazione.');
+}
+
+function combinaPozzi(litriMin){
+  const pozzi=(db.pozzi||[]).filter(p=>n(p.litriMin)>0);
+  if(!litriMin) return {testo:'Nessuna richiesta L/min calcolata.', combo:[], totale:0, ok:false};
+  if(!pozzi.length) return {testo:'Nessun pozzo salvato. Inserisci i pozzi nella tabella Pozzi.', combo:[], totale:0, ok:false};
+  let best=null;
+  if(pozzi.length<=14){
+    const max=1<<pozzi.length;
+    for(let mask=1;mask<max;mask++){
+      let combo=[],tot=0;
+      for(let i=0;i<pozzi.length;i++) if(mask&(1<<i)){combo.push(pozzi[i]); tot+=n(pozzi[i].litriMin)}
+      if(tot>=litriMin){const excess=tot-litriMin; if(!best || excess<best.excess || (excess===best.excess && combo.length<best.combo.length)) best={combo,tot,excess};}
+    }
+  }
+  if(!best){
+    let combo=[],tot=0; pozzi.slice().sort((a,b)=>n(b.litriMin)-n(a.litriMin)).forEach(p=>{if(tot<litriMin){combo.push(p);tot+=n(p.litriMin)}}); best={combo,tot,excess:tot-litriMin};
+  }
+  const ok=best.tot>=litriMin;
+  return {testo: ok?`Accendi: ${best.combo.map(p=>p.nome).join(' + ')} (${fmt(best.tot,1)} L/min)`:`Portata insufficiente: tutti i pozzi danno ${fmt(best.tot,1)} L/min, richiesta ${fmt(litriMin,1)} L/min`, combo:best.combo, totale:best.tot, ok};
+}
+function renderSuggerimentoPozzi(litriMin){
+  const s=combinaPozzi(litriMin);
+  if(!s.combo || !s.combo.length){
+    return `<div class="pozzi-card"><h4>Pozzi</h4><div class="pn">selezionati automaticamente in base ai campi</div><div class="preq">Richiesta impianto: <b>${fmt(litriMin,1)} L/min</b></div><div class="pstatus no"><span class="pdot"></span>${esc(s.testo)}</div></div>`;
+  }
+  const righe=s.combo.map(p=>`<div class="prow"><span class="name">${esc(p.nome)}</span><span class="lmin">${fmt(n(p.litriMin),1)} L/min</span></div>`).join('');
+  const ok=s.ok;
+  const statusTxt=ok?'Copre la richiesta':('Mancano '+fmt(litriMin-s.totale,1)+' L/min');
+  return `<div class="pozzi-card"><h4>Pozzi da accendere</h4><div class="pn">selezionati automaticamente in base ai campi</div>${righe}<div class="ptot"><span class="name" style="font-weight:800">Totale erogato</span><span class="lmin">${fmt(s.totale,1)} L/min</span></div><div class="preq">Richiesta impianto: <b>${fmt(litriMin,1)} L/min</b></div><div class="pstatus ${ok?'ok':'no'}"><span class="pdot"></span>${statusTxt}</div></div>`;
+}
+function aggiornaSliderFill(){
+  const sl=document.getElementById('sliderOre'); if(!sl) return;
+  const min=parseFloat(sl.min), max=parseFloat(sl.max), val=parseFloat(sl.value)||min;
+  const pct=((val-min)/(max-min))*100;
+  sl.style.backgroundSize=pct+'% 100%';
+  const lab=document.getElementById('sliderOreVal');
+  if(lab) lab.textContent=(Number.isInteger(val)?val:fmt(val,1))+(val===1?' ora':' ore');
+}
+function sincronizzaSliderOre(){
+  const sl=document.getElementById('sliderOre'); const inp=document.getElementById('oreIrr'); if(!sl||!inp) return;
+  let v=parseFloat(inp.value);
+  if(isFinite(v)){ if(v<parseFloat(sl.min)) v=parseFloat(sl.min); if(v>parseFloat(sl.max)) v=parseFloat(sl.max); sl.value=v; }
+  aggiornaSliderFill();
+}
+function resetPozzoForm(){pozzoEditId.value=''; nomePozzo.value=''; litriMinPozzo.value=''; notePozzo.value='';}
+function salvaPozzo(){const p={id:pozzoEditId.value||uid(), nome:nomePozzo.value.trim(), litriMin:n(litriMinPozzo.value), note:notePozzo.value.trim()}; if(!p.nome){alert('Inserisci nome pozzo');return} if(!p.litriMin){alert('Inserisci litri/minuto del pozzo');return} const i=(db.pozzi||[]).findIndex(x=>x.id===p.id); if(i>=0)db.pozzi[i]=p; else db.pozzi.push(p); save(); resetPozzoForm(); renderAll(); pozziListWrap.classList.remove('hidden'); btnPozziList.textContent='Chiudi tabella';}
+function editPozzo(id){const p=(db.pozzi||[]).find(x=>x.id===id); if(!p)return; showSection('pozzi'); pozzoEditId.value=p.id; nomePozzo.value=p.nome||''; litriMinPozzo.value=p.litriMin||''; notePozzo.value=p.note||'';}
+function delPozzo(id){if(!confirm('Eliminare questo pozzo?'))return; db.pozzi=(db.pozzi||[]).filter(x=>x.id!==id); save(); renderAll();}
+function renderPozzi(){if(!document.getElementById('listaPozzi'))return; const arr=db.pozzi||[]; listaPozzi.innerHTML=arr.length?arr.map(p=>`<div class="item"><div class="item-title">${esc(p.nome)}</div><div class="item-meta"><b>${fmt(p.litriMin,1)} L/min</b>${p.note?'<br>Note: '+esc(p.note):''}</div><div class="item-actions"><button onclick="editPozzo('${p.id}')">Modifica</button><button class="danger" onclick="delPozzo('${p.id}')">Elimina</button></div></div>`).join(''):'<div class="notice">Nessun pozzo salvato.</div>';}
+function testoIrrigazione(irr){
+  const t=irr.totali||{}; const acqua=irr.acqua||'impianto'; const conc=irr.concime;
+  let testo=descrizioneIrrigazione(irr)+'\n';
+  // filari da aprire / trattare
+  const righe=(irr.righe||[]).map(r=>`- ${r.campoNome} / ${r.settoreNome}: filari ${filariTxt(r)}`).join('\n');
+  if(acqua==='impianto'){
+    const poz=combinaPozzi(n(t.litriMin));
+    testo+='Ore: '+fmt(irr.ore,2)+'\n';
+    testo+='\nAPRIRE QUESTI FILARI:\n'+righe+'\n';
+    testo+='\nAcqua: '+fmt(t.mmCampo,2)+' mm · '+fmt(t.m3,2)+' m³ · '+fmt(t.litri,0)+' L';
+    testo+='\nRichiesta impianto: '+fmt(t.litriMin,1)+' L/min';
+    testo+='\nPozzi: '+poz.testo;
+  } else if(acqua==='botte'){
+    testo+='Metodo: '+(irr.metodo||'Manichetta')+'\n';
+    testo+='Botti da '+fmt(irr.litriBotte||1000,0)+' L: '+fmt(irr.nBotti,1)+(irr.fileBotte?(' · '+fmt(irr.fileBotte,0)+' file per passata'):'')+'\n';
+    testo+='\nFILE DA TRATTARE:\n'+righe+'\n';
+    testo+='\nAcqua: '+fmt(t.litri,0)+' L · '+fmt(t.m3,2)+' m³';
+  } else {
+    testo+='Metodo: '+(irr.metodo||'Concimazione')+'\n';
+    testo+='\nCAMPI/FILE DA TRATTARE:\n'+righe+'\n';
+  }
+  if(conc){
+    testo+='\n\nCONCIME:';
+    (conc.prodotti||[]).forEach(p=>{ testo+='\n- '+p.nome+': '+fmt(p.dose,2)+' kg/ha — totale '+fmt(p.totaleKg,1)+' kg'; });
+    testo+='\nUnità/ha: N '+fmt(conc.n,1)+' · P '+fmt(conc.p,1)+' · K '+fmt(conc.k,1)+' · Mg '+fmt(conc.mg,1)+' · Ca '+fmt(conc.ca,1);
+  }
+  if(irr.note) testo+='\n\nNote: '+irr.note;
+  return testo;
+}
+function irrCorrenteObj(){
+  const tipo=tipoOperazioneCorrente(); const metodo=metodoCorrente(); const acqua=operazioneHaAcqua();
+  const t=calcTotaliIrr(); const ore=n(oreIrr.value);
+  let righe;
+  if(acqua==='impianto') righe=righeIrr.map(r=>({...r, litri:n(r.litriOra)*ore, m3:n(r.m3Ora)*ore, mmCampo:n(r.mmOraCampo)*ore, mmBagnato:r.mmOraBagnato!==null?n(r.mmOraBagnato)*ore:null}));
+  else if(acqua==='botte'){const ett=t.ettari||1; righe=righeIrr.map(r=>{const q=n(r.ettari)/ett; const litri=t.litri*q; const m3=litri/1000; return {...r, litri, m3, mmCampo:n(r.ettari)>0?m3/n(r.ettari)/10:0, mmBagnato:null};});}
+  else righe=righeIrr.map(r=>({...r, litri:0, m3:0, mmCampo:0, mmBagnato:null}));
+  const nomi=[...new Set(righe.map(r=>r.campoNome))];
+  let concime=null;
+  if(tipo==='concimazione' && miscelaIrr.length){const ett=t.ettari||0; const u=totaliConcimeMiscela(); concime={metodo, prodotti:miscelaIrr.map(m=>({...m, totaleKg:n(m.totaleKg)>0?n(m.totaleKg):(ett>0?m.dose*ett:0)})), n:u.n,p:u.p,k:u.k,mg:u.mg,ca:u.ca};}
+  return {id:'corrente', data:dataIrr.value||today(), tipoOperazione:tipo, metodo:tipo==='concimazione'?metodo:'', acqua, ore:acqua==='impianto'?ore:0, nBotti:acqua==='botte'?n(document.getElementById('nBotti').value):0, litriBotte:acqua==='botte'?(n(document.getElementById('litriBotte').value)||1000):0, fileBotte:acqua==='botte'?n(document.getElementById('fileBotte').value):0, campoNome:nomi.join(' + '), righe, totali:t, concime, note:noteIrr.value.trim()};
+}
+function whatsappTesto(txt){window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');}
+function whatsappIrrCorrente(){if(!righeIrr.length){alert('Aggiungi almeno una riga');return} whatsappTesto(testoIrrigazione(irrCorrenteObj()));}
+function whatsappIrr(id){const irr=db.irrigazioni.find(i=>i.id===id); if(irr) whatsappTesto(testoIrrigazione(irr));}
+function htmlStampa(irr){const txt=testoIrrigazione(irr).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>'); return `<!doctype html><html><head><meta charset="utf-8"><title>Stampa operazione</title><style>body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif;font-size:16px;line-height:1.35;padding:20px}h1{font-size:22px}.box{border:1px solid #ddd;border-radius:12px;padding:14px}</style></head><body><h1>Quaderno di Campo</h1><div class="box">${txt}</div></body></html>`;}
+function stampaIrrCorrente(){if(!righeIrr.length){alert('Aggiungi almeno una riga');return} stampaTramiteIframe(htmlStampa(irrCorrenteObj()));}
+function stampaIrr(id){const irr=db.irrigazioni.find(i=>i.id===id); if(!irr)return; stampaTramiteIframe(htmlStampa(irr));}
+
+function cleanDescrizione(v){return String(v||'').trim().replace(/\s+/g,' ')}
+function getDescInput(tipo){return tipo==='colture'?document.getElementById('nuovaColtura'):document.getElementById('nuovaVarieta')}
+function nomeTipoDesc(tipo){return tipo==='colture'?'coltura':'varietà/settore'}
+function aggiungiDescrizione(tipo){
+  if(!db.descrizioni) db.descrizioni=JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI));
+  const inp=getDescInput(tipo); const val=cleanDescrizione(inp?.value);
+  if(!val){alert('Inserisci il nome della '+nomeTipoDesc(tipo)); return;}
+  const arr=db.descrizioni[tipo]||[];
+  if(arr.some(x=>cleanDescrizione(x).toLowerCase()===val.toLowerCase())){alert('Nome già presente'); return;}
+  arr.push(val); arr.sort((a,b)=>a.localeCompare(b,'it'));
+  db.descrizioni[tipo]=arr; if(inp)inp.value=''; save(); renderDescrizioni(); renderDatalists();
+}
+function modificaDescrizione(tipo,idx){
+  const arr=db.descrizioni?.[tipo]||[]; const old=arr[idx]; if(!old)return;
+  const val=cleanDescrizione(prompt('Modifica '+nomeTipoDesc(tipo), old));
+  if(!val)return;
+  if(arr.some((x,i)=>i!==idx && cleanDescrizione(x).toLowerCase()===val.toLowerCase())){alert('Nome già presente'); return;}
+  arr[idx]=val; arr.sort((a,b)=>a.localeCompare(b,'it')); save(); renderDescrizioni(); renderDatalists();
+}
+function eliminaDescrizione(tipo,idx){
+  const arr=db.descrizioni?.[tipo]||[]; const old=arr[idx]; if(!old)return;
+  if(!confirm('Eliminare "'+old+'" dalle descrizioni? I campi già salvati non vengono modificati.'))return;
+  arr.splice(idx,1); save(); renderDescrizioni(); renderDatalists();
+}
+function renderListaDescrizioni(tipo, elId){
+  const el=document.getElementById(elId); if(!el)return;
+  const arr=(db.descrizioni?.[tipo]||[]).slice().sort((a,b)=>a.localeCompare(b,'it'));
+  el.innerHTML=arr.length?arr.map((v,i)=>`<div class="item"><div class="item-title">${esc(v)}</div><div class="item-actions"><button onclick="modificaDescrizione('${tipo}',${i})">Modifica</button><button class="danger" onclick="eliminaDescrizione('${tipo}',${i})">Elimina</button></div></div>`).join(''):'<div class="notice">Nessuna descrizione salvata.</div>';
+}
+function renderDatalists(){
+  const lc=document.getElementById('listaColture'); if(lc) lc.innerHTML=(db.descrizioni?.colture||[]).map(v=>`<option value="${esc(v)}"></option>`).join('');
+  const lv=document.getElementById('listaVarieta'); if(lv) lv.innerHTML=(db.descrizioni?.varieta||[]).map(v=>`<option value="${esc(v)}"></option>`).join('');
+}
+function renderDescrizioni(){renderListaDescrizioni('colture','listaDescColture'); renderListaDescrizioni('varieta','listaDescVarieta'); renderDatalists();}
+
+
+function syncSetStatus(msg, ok=false){const el=document.getElementById('syncStatus'); if(el){el.className='notice '+(ok?'ok':''); el.innerHTML=msg;}}
+function normalizzaDb(){
+  if(!db.campi)db.campi=[]; if(!db.irrigazioni)db.irrigazioni=[]; if(!db.pozzi)db.pozzi=[]; if(!db.piani)db.piani=[]; if(!Array.isArray(db.concimi))db.concimi=[];
+  if(!db.concimi.length) db.concimi=JSON.parse(JSON.stringify(DEFAULT_CONCIMI));
+  if(!db.descrizioni) db.descrizioni=JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI));
+  if(!Array.isArray(db.descrizioni.colture)) db.descrizioni.colture=[...DEFAULT_DESCRIZIONI.colture];
+  if(!Array.isArray(db.descrizioni.varieta)) db.descrizioni.varieta=[...DEFAULT_DESCRIZIONI.varieta];
+  db.campi.forEach(c=>{if(!c.settori)c.settori=[]});
+}
+function getSyncUrl(){return (document.getElementById('syncUrl')?.value||localStorage.getItem(SYNC_URL_KEY)||DEFAULT_SYNC_URL||'').trim();}
+function salvaSyncUrl(){const url=getSyncUrl(); if(!url || !url.includes('script.google.com/macros/s/')){alert('Incolla il link Web App di Apps Script che finisce con /exec'); return;} localStorage.setItem(SYNC_URL_KEY,url); if(localStorage.getItem(AUTO_SYNC_KEY)===null)localStorage.setItem(AUTO_SYNC_KEY,'1'); loadAutoSync(); syncSetStatus('Link Google Sheets salvato. Sync automatico attivo.', true);}
+function loadSyncUrl(){const el=document.getElementById('syncUrl'); const saved=localStorage.getItem(SYNC_URL_KEY); if(el) el.value=saved||DEFAULT_SYNC_URL||''; if(!saved && DEFAULT_SYNC_URL) localStorage.setItem(SYNC_URL_KEY, DEFAULT_SYNC_URL); if(localStorage.getItem(AUTO_SYNC_KEY)===null)localStorage.setItem(AUTO_SYNC_KEY,'1');}
+function jsonpCall(params, cb){
+  const url=getSyncUrl(); if(!url){alert('Inserisci prima il link Web App'); return;}
+  const name='cbSync_'+Date.now()+'_'+Math.random().toString(36).slice(2);
+  window[name]=function(res){try{cb(res)}finally{delete window[name]; script.remove();}};
+  const qs=new URLSearchParams({...params, callback:name, t:Date.now()}).toString();
+  const script=document.createElement('script'); script.src=url+(url.includes('?')?'&':'?')+qs; script.onerror=()=>{syncSetStatus('Errore collegamento. Controlla link Web App e autorizzazioni.', false); delete window[name];};
+  document.body.appendChild(script);
+}
+function testSync(){salvaSyncUrl(); syncSetStatus('Controllo collegamento in corso...'); jsonpCall({action:'ping'}, res=>{syncSetStatus(res&&res.ok?'Collegamento Google Sheets OK.':'Collegamento non riuscito.', !!(res&&res.ok));});}
+function syncInviaGoogle(){
+  salvaSyncUrl(); const url=getSyncUrl();
+  if(!confirm('Inviare i dati di questo dispositivo a Google Sheets? I dati online verranno sostituiti.')) return;
+  const iframeName='syncFrame_'+Date.now(); const iframe=document.createElement('iframe'); iframe.name=iframeName; iframe.style.display='none'; document.body.appendChild(iframe);
+  const form=document.createElement('form'); form.method='POST'; form.action=url; form.target=iframeName; form.style.display='none';
+  const a=document.createElement('input'); a.name='action'; a.value='save';
+  const d=document.createElement('input'); d.name='data'; d.value=JSON.stringify(db);
+  form.appendChild(a); form.appendChild(d); document.body.appendChild(form); form.submit();
+  syncSetStatus('Dati inviati a Google Sheets. Con sync automatico, l’altro dispositivo scaricherà all’apertura.', true);
+  setTimeout(()=>{form.remove(); iframe.remove();},5000);
+}
+function syncScaricaGoogle(){
+  salvaSyncUrl();
+  if(!confirm('Scaricare i dati da Google Sheets su questo dispositivo? I dati locali verranno sostituiti.')) return;
+  syncScaricaGoogleAuto(false);
+}
+function syncScaricaGoogleAuto(silenzioso=true){
+  const url=getSyncUrl();
+  if(!url) return;
+  if(!silenzioso) syncSetStatus('Scaricamento dati da Google Sheets...');
+  jsonpCall({action:'load'}, res=>{
+    try{
+      if(!res||!res.ok||!res.data){ if(!silenzioso) syncSetStatus('Nessun dato trovato su Google Sheets. Prima fai “Invia a Google Sheets” dal dispositivo con i dati.', false); return; }
+      const obj=typeof res.data==='string'?JSON.parse(res.data):res.data;
+      suppressAutoSync=true;
+      db=obj; normalizzaDb(); save({noAutoSync:true}); renderAll();
+      suppressAutoSync=false;
+      localStorage.setItem('registroIrrigazioniLastAutoDownload', new Date().toISOString());
+      syncSetStatus((silenzioso?'Sync automatico: dati scaricati da Google Sheets.':'Dati scaricati da Google Sheets.')+' Ultimo aggiornamento: '+(res.updatedAt||''), true);
+    }catch(e){ if(!silenzioso) syncSetStatus('Errore lettura dati Google Sheets.', false); suppressAutoSync=false; }
+  });
+}
+function isAutoSyncOn(){return localStorage.getItem(AUTO_SYNC_KEY)!=='0' && !!getSyncUrl();}
+function loadAutoSync(){const el=document.getElementById('autoSync'); if(el) el.checked=localStorage.getItem(AUTO_SYNC_KEY)!=='0';}
+function toggleAutoSync(){
+  const on=!!document.getElementById('autoSync')?.checked;
+  localStorage.setItem(AUTO_SYNC_KEY,on?'1':'0');
+  syncSetStatus(on?'Sync automatico attivato.':'Sync automatico disattivato.', on);
+  if(on && getSyncUrl()) syncScaricaGoogleAuto(true);
+}
+function scheduleAutoUpload(){
+  if(!isAutoSyncOn() || !getSyncUrl()) return;
+  clearTimeout(autoSyncTimer);
+  autoSyncTimer=setTimeout(()=>syncInviaGoogleAuto(),1200);
+}
+function syncInviaGoogleAuto(){
+  const url=getSyncUrl(); if(!url || suppressAutoSync) return;
+  const iframeName='syncFrameAuto_'+Date.now(); const iframe=document.createElement('iframe'); iframe.name=iframeName; iframe.style.display='none'; document.body.appendChild(iframe);
+  const form=document.createElement('form'); form.method='POST'; form.action=url; form.target=iframeName; form.style.display='none';
+  const a=document.createElement('input'); a.name='action'; a.value='save';
+  const d=document.createElement('input'); d.name='data'; d.value=JSON.stringify(db);
+  form.appendChild(a); form.appendChild(d); document.body.appendChild(form); form.submit();
+  localStorage.setItem('registroIrrigazioniLastAutoUpload', new Date().toISOString());
+  syncSetStatus('Sync automatico: dati inviati a Google Sheets.', true);
+  setTimeout(()=>{form.remove(); iframe.remove();},5000);
+}
+function autoSyncStartup(){
+  if(isAutoSyncOn() && getSyncUrl()){
+    syncSetStatus('Sync automatico: controllo Google Sheets...');
+    setTimeout(()=>syncScaricaGoogleAuto(true),700);
+  }
+}
+
+
+function htmlDocStampa(titolo, contenuto){
+  return `<!doctype html><html><head><meta charset="utf-8"><title>${titolo}</title><style>
+    body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Arial,sans-serif;font-size:12px;line-height:1.35;padding:18px;color:#1d2b1f}
+    h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:18px 0 8px}.sub{color:#666;margin-bottom:14px}
+    table{width:100%;border-collapse:collapse;margin:8px 0 14px} th,td{border:1px solid #ccc;padding:6px;vertical-align:top;text-align:left} th{background:#eef6f0}
+    .tot{border:1px solid #bad3c0;background:#f7fbf8;border-radius:10px;padding:10px;margin:10px 0 14px;font-weight:700}
+    .small{font-size:11px;color:#555}.pagebreak{break-inside:avoid}
+    @media print{button{display:none} body{padding:0}}
+  </style></head><body><h1>${titolo}</h1><div class="sub">Stampato il ${new Date().toLocaleDateString('it-IT')} · Quaderno di Campo V2 · Stagione ${stagioneAttiva}</div>${contenuto}</body></html>`;
+}
+function stampaTramiteIframe(htmlCompleto){
+  // Stampa usando un iframe nascosto: NON apre una scheda separata,
+  // così su iPhone resti sempre dentro il programma.
+  const vecchio=document.getElementById('printFrame');
+  if(vecchio) vecchio.remove();
+  const iframe=document.createElement('iframe');
+  iframe.id='printFrame';
+  iframe.style.position='fixed'; iframe.style.right='0'; iframe.style.bottom='0';
+  iframe.style.width='0'; iframe.style.height='0'; iframe.style.border='0';
+  document.body.appendChild(iframe);
+  const doc=iframe.contentWindow.document;
+  doc.open(); doc.write(htmlCompleto); doc.close();
+  const lancia=()=>{ try{ iframe.contentWindow.focus(); iframe.contentWindow.print(); }catch(e){} };
+  // diamo un attimo al contenuto per caricarsi, poi stampiamo
+  setTimeout(lancia, 400);
+  // rimuoviamo l'iframe dopo un po'
+  setTimeout(()=>{ const f=document.getElementById('printFrame'); if(f) f.remove(); }, 60000);
+}
+function stampaHtml(titolo, contenuto){ stampaTramiteIframe(htmlDocStampa(titolo,contenuto)); }
+function campiFiltrati(){const q=(document.getElementById('cercaCampi')?.value||'').toLowerCase(); return db.campi.filter(c=>JSON.stringify(c).toLowerCase().includes(q));}
+function stampaCampi(){
+  const arr=campiFiltrati();
+  if(!arr.length){alert('Nessun campo da stampare.');return}
+  let totSup=0, totHa=0, totLitriMin=0, totM3Ora=0, totFilari=0;
+  const rows=arr.map(c=>{const r=calcolaCampo(c); totSup+=n(r.sup); totHa+=n(r.haUsati); totLitriMin+=n(r.litriMin); totM3Ora+=n(r.m3Ora); totFilari+=n(c.filariTot); const sett=(c.settori||[]).map(s=>`${esc(s.nome)}: filari ${labelFilariNumeri(s.numeriFilari,s.filari)}`).join('<br>'); const imp=c.tipoIrr==='ala'?`Ala · passo ${fmt(c.passoGoccia||0.5,2)} m · gocc. ${fmt(c.portataGoccia||2.3,2)} L/h · fascia ${fmt(c.larghezzaBagnataAla,2)} m`:`Micro · ${fmt(c.numMicro,0)} pezzi · ${fmt(c.portataMicro||50,2)} L/h · diam. ${fmt(c.diametroMicro,2)} m`; return `<tr><td><b>${esc(c.nome)}</b><br>${esc(c.coltura||'')}</td><td>${imp}</td><td>${fmt(c.filariTot,0)}</td><td>${fmt(c.lungFilare,0)} m<br>interfila ${fmt(c.interfila,2)} m</td><td>${fmt(r.haUsati,4)}</td><td><b>${fmt(r.litriMin,1)}</b></td><td>${fmt(r.m3Ora,2)}</td><td>${fmt(r.mmOraCampo,2)}</td><td>${sett||'—'}</td></tr>`;}).join('');
+  const contenuto=`<div class="tot">Totali campi stampati: ${arr.length} · Filari ${fmt(totFilari,0)} · Superficie ${fmt(totSup,0)} m² · Ettari ${fmt(totHa,4)} · Richiesta totale se tutti accesi insieme ${fmt(totLitriMin,1)} L/min · ${fmt(totM3Ora,2)} m³/ora</div><table><thead><tr><th>Campo</th><th>Impianto</th><th>Filari</th><th>Misure</th><th>Ha</th><th>L/min</th><th>m³/ora</th><th>mm/ora</th><th>Varietà / settori</th></tr></thead><tbody>${rows}</tbody></table>`;
+  stampaHtml('Stampa campi / impianti', contenuto);
+}
+function registroFiltrato(){const q=(document.getElementById('cercaRegistro')?.value||'').toLowerCase(); const filtro=document.getElementById('filtroRegistro')?.value||'tutto'; return [...db.irrigazioni].filter(i=>stagioneDi(i)===stagioneAttiva).filter(i=>{ if(filtro==='irrigazione') return isIrrigazioneAcqua(i); if(filtro==='concimazione') return isConcimazione(i); return true; }).sort((a,b)=>(b.data||'').localeCompare(a.data||'')).filter(i=>JSON.stringify(i).toLowerCase().includes(q));}
+function stampaRegistro(){
+  const arr=registroFiltrato();
+  if(!arr.length){alert('Nessuna irrigazione da stampare.');return}
+  let totOre=0, totM3=0, totLitri=0, totSup=0;
+  const rows=arr.map(i=>{const t=i.totali||{}; totOre+=n(i.ore); totM3+=n(t.m3); totLitri+=n(t.litri); totSup+=n(t.superficie); const righe=(i.righe||[]).map(r=>`${esc(r.campoNome)} / ${esc(r.settoreNome)} · filari ${filariTxt(r)} · ${fmt(r.m3,2)} m³ · ${fmt(r.litriMin,1)} L/min`).join('<br>'); return `<tr><td><b>${esc(descrizioneIrrigazione(i))}</b><br>${esc(i.note||'')}</td><td>${fmt(i.ore,2)}</td><td>${fmt(t.litriMin,1)}</td><td>${fmt(t.mmCampo,2)}</td><td>${fmt(t.m3,2)}</td><td>${fmt(t.litri,0)}</td><td>${fmt(t.superficie,0)}</td><td>${righe}</td></tr>`;}).join('');
+  const contenuto=`<div class="tot">Totali registro stampato: ${arr.length} irrigazioni · Ore ${fmt(totOre,2)} · ${fmt(totM3,2)} m³ · ${fmt(totLitri,0)} L · Superficie interventi ${fmt(totSup,0)} m²</div><table><thead><tr><th>Irrigazione</th><th>Ore</th><th>L/min richiesti</th><th>mm medi</th><th>m³</th><th>Litri</th><th>m²</th><th>Dettaglio campi/settori</th></tr></thead><tbody>${rows}</tbody></table>`;
+  stampaHtml('Stampa registro irrigazioni', contenuto);
+}
+function stampaConcimazioni(){
+  const arr=[...db.irrigazioni].filter(i=>stagioneDi(i)===stagioneAttiva && isConcimazione(i)).sort((a,b)=>(b.data||'').localeCompare(a.data||''));
+  if(!arr.length){alert('Nessuna concimazione da stampare in questa stagione.');return}
+  let tKg=0;
+  const rows=arr.map(i=>{
+    const conc=i.concime||{}; const ha=n((i.totali||{}).ettari);
+    const prod=(conc.prodotti||[]).map(p=>{tKg+=n(p.totaleKg); return `${esc(p.nome)}: ${fmt(p.dose,2)} kg/ha — tot ${fmt(p.totaleKg,1)} kg`;}).join('<br>');
+    return `<tr><td><b>${formatDataIT(i.data)}</b></td><td>${esc(i.metodo||'')}</td><td>${esc(i.campoNome)}</td><td>${fmt(ha,2)}</td><td>${prod}</td><td>N ${fmt(conc.n,1)}<br>P ${fmt(conc.p,1)}<br>K ${fmt(conc.k,1)}<br>Mg ${fmt(conc.mg,1)}<br>Ca ${fmt(conc.ca,1)}</td><td>${esc(i.note||'')}</td></tr>`;
+  }).join('');
+  const contenuto=`<div class="tot">Concimazioni stampate: ${arr.length} · Prodotto totale distribuito ${fmt(tKg,1)} kg · Stagione ${stagioneAttiva}</div><table><thead><tr><th>Data</th><th>Metodo</th><th>Campi</th><th>Ha</th><th>Prodotti / dosi</th><th>Unità/ha</th><th>Note</th></tr></thead><tbody>${rows}</tbody></table>`;
+  stampaHtml('Stampa registro concimazioni', contenuto);
+}
+
+function isConcimazione(i){return i.tipoOperazione==='concimazione';}
+function isIrrigazioneAcqua(i){return (i.acqua && i.acqua!=='no') || i.tipoOperazione!=='concimazione';}
+function renderRegistro(){
+  const q=(document.getElementById('cercaRegistro')?.value||'').toLowerCase();
+  const filtro=document.getElementById('filtroRegistro')?.value||'tutto';
+  let arr=[...db.irrigazioni].filter(i=>stagioneDi(i)===stagioneAttiva)
+    .filter(i=>{ if(filtro==='irrigazione') return isIrrigazioneAcqua(i); if(filtro==='concimazione') return isConcimazione(i); return true; })
+    .sort((a,b)=>(b.data||'').localeCompare(a.data||''))
+    .filter(i=>JSON.stringify(i).toLowerCase().includes(q));
+  listaRegistro.innerHTML=arr.length?arr.map(i=>{
+    const t=i.totali||{}; const conc=i.concime;
+    const acqua=i.acqua||'impianto';
+    let badge='';
+    if(isConcimazione(i)){ badge=`<span class="tag-method tag-conc">${esc(i.metodo||'Concime')}</span>`; if(acqua!=='no') badge+=`<span class="tag-method tag-irr">+ acqua</span>`; }
+    else badge=`<span class="tag-method tag-irr">Irrigazione</span>`;
+    const righe=(i.righe||[]).map(r=>`<div class="small">• ${esc(r.campoNome)} — ${esc(r.settoreNome)}: filari ${filariTxt(r)}${n(r.mmCampo)>0?', '+fmt(r.mmCampo,2)+' mm, '+fmt(r.m3,2)+' m³':''}</div>`).join('');
+    let blocco='';
+    if(acqua==='impianto') blocco=`<div class="item-meta"><b>${fmt(t.mmCampo,2)} mm medi</b> · ${fmt(t.m3,2)} m³ · ${fmt(t.litri,0)} L · ${fmt(t.litriMin,1)} L/min</div>${renderSuggerimentoPozzi(n(t.litriMin))}`;
+    else if(acqua==='botte') blocco=`<div class="item-meta"><b>${fmt(t.litri,0)} L acqua (${fmt(i.nBotti,1)} botti)</b> · ${fmt(t.m3,2)} m³ · ${fmt(t.mmCampo,2)} mm</div>`;
+    let concHtml='';
+    if(conc){
+      const prod=(conc.prodotti||[]).map(p=>`<div class="small">🧪 ${esc(p.nome)}: ${fmt(p.dose,2)} kg/ha — tot ${fmt(p.totaleKg,1)} kg</div>`).join('');
+      concHtml=`<div class="item-meta" style="margin-top:6px"><b>Unità/ha:</b> N ${fmt(conc.n,1)} · P ${fmt(conc.p,1)} · K ${fmt(conc.k,1)} · Mg ${fmt(conc.mg,1)} · Ca ${fmt(conc.ca,1)}</div>${prod}`;
+    }
+    return `<div class="item"><div class="item-title">${esc(descrizioneIrrigazione(i))}</div><div>${badge}</div>${blocco}${concHtml}${righe}${i.note?'<div class="item-meta">Note: '+esc(i.note)+'</div>':''}<div class="item-actions"><button onclick="editIrr('${i.id}')">Modifica</button><button class="secondary" onclick="duplicaIrr('${i.id}')">Duplica</button><button class="secondary" onclick="stampaIrr('${i.id}')">Stampa</button><button class="secondary" onclick="whatsappIrr('${i.id}')">WhatsApp</button><button class="danger" onclick="delIrr('${i.id}')">Elimina</button></div></div>`;
+  }).join(''):'<div class="notice">Nessuna operazione nella stagione '+stagioneAttiva+' con questo filtro.</div>';
+}
+function renderSelects(){['campoIrr','campoCalc'].forEach(id=>{const sel=document.getElementById(id); if(!sel)return; const old=sel.value; const ph=id==='campoIrr'?'<option value="">-- scegli campo da aggiungere --</option>':'<option value="">-- scegli campo --</option>'; sel.innerHTML=ph+db.campi.map(c=>`<option value="${c.id}">${esc(c.nome)}</option>`).join(''); if(db.campi.some(c=>c.id===old))sel.value=old; else sel.value='';}); renderSettoriIrr();}
+function aggiornaCalcoloRapido(){const c=db.campi.find(x=>x.id===campoCalc?.value); const mm=n(mmDesiderati?.value); if(!risCalc) return; if(!c){risCalc.innerHTML='<div class="small">Scegli un campo per calcolare quante ore servono per dare i mm desiderati.</div>';return} const r=calcolaCampo(c); const ore=r.mmOraCampo>0?mm/r.mmOraCampo:0; const m3=mm*r.haUsati*10; risCalc.innerHTML=`<div class="big-result">${fmt(ore,2)} ore</div><div>Per dare ${fmt(mm,2)} mm servono circa ${fmt(m3,2)} m³ sul campo intero.</div>${r.mmOraBagnato!==null?`<div class="small">Nota micro: nella zona bagnata il valore è ${fmt(r.mmOraBagnato,2)} mm/ora per ogni micro.</div>`:''}`}
+function renderRiepilogo(){const map={}; db.irrigazioni.filter(i=>stagioneDi(i)===stagioneAttiva).forEach(i=>{(i.righe||[]).forEach(r=>{let k=r.campoId+'|'+r.settoreNome; if(!map[k])map[k]={nome:r.campoNome,settore:r.settoreNome,ore:0,m3:0,litri:0,mm:0,n:0}; map[k].ore+=n(i.ore); map[k].m3+=n(r.m3); map[k].litri+=n(r.litri); map[k].mm+=n(r.mmCampo); map[k].n++;});}); const arr=Object.values(map).sort((a,b)=>a.nome.localeCompare(b.nome,'it')||a.settore.localeCompare(b.settore,'it')); const intestazione=`<div class="notice ok"><b>Stagione ${stagioneAttiva}</b> · ${arr.length} campi/settori irrigati</div>`; listaRiepilogo.innerHTML=arr.length?intestazione+arr.map(r=>`<div class="item"><div class="item-title">${esc(r.nome)} · ${esc(r.settore)}</div><div class="item-meta">Interventi ${r.n} · Ore ${fmt(r.ore,2)}<br><b>Totale ${fmt(r.mm,2)} mm</b> · ${fmt(r.m3,2)} m³ · ${fmt(r.litri,0)} L</div></div>`).join(''):'<div class="notice">Nessun dato per il riepilogo della stagione '+stagioneAttiva+'.</div>'}
+// === V42: gestione stagioni ===
+function stagioniDisponibili(){
+  const set=new Set();
+  (db.irrigazioni||[]).forEach(i=>set.add(stagioneDi(i)));
+  set.add(new Date().getFullYear());
+  set.add(stagioneAttiva);
+  return [...set].sort((a,b)=>b-a);
+}
+function popolaSelStagione(){
+  const sel=document.getElementById('stagioneSel'); if(!sel) return;
+  const anni=stagioniDisponibili();
+  const old=sel.value;
+  sel.innerHTML=anni.map(a=>`<option value="${a}">Stagione ${a}</option>`).join('');
+  sel.value=String(stagioneAttiva);
+  const info=document.getElementById('stagioneInfo');
+  if(info){
+    const tot=(db.irrigazioni||[]).filter(i=>stagioneDi(i)===stagioneAttiva).length;
+    info.textContent=`· ${tot} irrigazioni in questa stagione`;
+  }
+}
+function cambiaStagione(anno){
+  const a=parseInt(anno,10)||new Date().getFullYear();
+  stagioneAttiva=a;
+  localStorage.setItem(STAGIONE_KEY,String(a));
+  popolaSelStagione();
+  renderAll();
+}
+function caricaStagione(){
+  const saved=localStorage.getItem(STAGIONE_KEY);
+  if(saved) stagioneAttiva=parseInt(saved,10)||new Date().getFullYear();
+  else stagioneAttiva=new Date().getFullYear();
+}
+
+// === V42: dashboard Home ultime irrigazioni ===
+function renderDashboard(){
+  const box=document.getElementById('dashboardUltime'); if(!box) return;
+  const arr=(db.irrigazioni||[]).filter(i=>stagioneDi(i)===stagioneAttiva).sort((a,b)=>(b.data||'').localeCompare(a.data||'')).slice(0,4);
+  if(!arr.length){box.innerHTML=`<div class="dash-title">Stagione ${stagioneAttiva}</div><div class="dash-item">Nessuna operazione registrata in questa stagione. Premi <b>➕ Nuova operazione</b> per inserire la prima.</div>`; return;}
+  const html=arr.map(i=>{
+    const t=i.totali||{}; const g=giorniDa(i.data); const acqua=i.acqua||'impianto';
+    let badge, dett;
+    if(isConcimazione(i)){
+      badge=`<span class="tag-method tag-conc">${esc(i.metodo||'Concime')}</span>`;
+      const conc=i.concime||{};
+      if(acqua==='botte') dett=`${fmt(t.litri,0)} L acqua · N ${fmt(conc.n,1)} P ${fmt(conc.p,1)} K ${fmt(conc.k,1)}`;
+      else if(acqua==='impianto') dett=`${fmt(i.ore,2)} ore · ${fmt(t.mmCampo,2)} mm · N ${fmt(conc.n,1)} P ${fmt(conc.p,1)} K ${fmt(conc.k,1)}`;
+      else dett=`solo concime · N ${fmt(conc.n,1)} P ${fmt(conc.p,1)} K ${fmt(conc.k,1)}`;
+    } else {
+      badge=`<span class="tag-method tag-irr">Irrigazione</span>`;
+      dett=`${fmt(i.ore,2)} ore · ${fmt(t.mmCampo,2)} mm · ${fmt(t.m3,2)} m³`;
+    }
+    return `<div class="dash-item"><b>${formatDataIT(i.data)}</b> · ${testoGiorniDa(g)} ${badge}<br>${esc(descrizioneIrrigazione(i))}<br><span class="small">${dett}</span></div>`;
+  }).join('');
+  box.innerHTML=`<div class="dash-title">Ultime operazioni · Stagione ${stagioneAttiva}</div>${html}`;
+}
+
+// === V43: calendario visuale ===
+function calMese(delta){
+  calMeseCorrente.setDate(1);
+  calMeseCorrente.setMonth(calMeseCorrente.getMonth()+delta);
+  calGiornoSel=null;
+  renderCalendario();
+}
+function calMeseOggi(){
+  calMeseCorrente=new Date();
+  calGiornoSel=null;
+  renderCalendario();
+}
+function iniziCampo(nome){
+  return String(nome||'').split(/\s+/).filter(Boolean).map(w=>w[0]).join('').slice(0,3).toUpperCase();
+}
+function renderCalendario(){
+  const cont=document.getElementById('calGriglia'); const tit=document.getElementById('calTitolo');
+  if(!cont||!tit) return;
+  const anno=calMeseCorrente.getFullYear(), mese=calMeseCorrente.getMonth();
+  const mesi=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre'];
+  tit.textContent=`${mesi[mese]} ${anno}`;
+  const primo=new Date(anno,mese,1);
+  const ultimo=new Date(anno,mese+1,0);
+  // calcolo offset (lunedì = 0)
+  let primoGiorno=primo.getDay()-1; if(primoGiorno<0) primoGiorno=6;
+  const totGiorni=ultimo.getDate();
+  // raccolgo irrigazioni del mese
+  const irrMese={};
+  (db.irrigazioni||[]).forEach(i=>{
+    if(!i.data) return;
+    const d=new Date(i.data); if(isNaN(d.getTime())) return;
+    if(d.getFullYear()!==anno||d.getMonth()!==mese) return;
+    const g=d.getDate();
+    if(!irrMese[g]) irrMese[g]=[];
+    irrMese[g].push(i);
+  });
+  const oggi=new Date(); oggi.setHours(0,0,0,0);
+  let html='';
+  for(let i=0;i<primoGiorno;i++) html+='<button class="cal-cell" disabled></button>';
+  for(let g=1;g<=totGiorni;g++){
+    const data=new Date(anno,mese,g);
+    const dataStr=`${anno}-${String(mese+1).padStart(2,'0')}-${String(g).padStart(2,'0')}`;
+    const irrs=irrMese[g]||[];
+    const isOggi=data.getTime()===oggi.getTime();
+    const isSel=calGiornoSel===dataStr;
+    const hasIrr=irrs.length>0;
+    const classes=['cal-cell']; if(isOggi)classes.push('oggi'); if(hasIrr)classes.push('has-irr'); if(isSel)classes.push('selected');
+    let tag='';
+    if(hasIrr){
+      const campi=[...new Set(irrs.flatMap(i=>(i.righe||[]).map(r=>r.campoNome)))];
+      tag='<span class="cal-tag">'+campi.slice(0,2).map(iniziCampo).join('·')+(campi.length>2?'+':'')+'</span>';
+    }
+    html+=`<button class="${classes.join(' ')}" onclick="calSelGiorno('${dataStr}')"><span class="cal-num">${g}</span>${tag}</button>`;
+  }
+  cont.innerHTML=html;
+  renderCalDettaglio();
+}
+function calSelGiorno(dataStr){
+  calGiornoSel=(calGiornoSel===dataStr)?null:dataStr;
+  renderCalendario();
+}
+function renderCalDettaglio(){
+  const box=document.getElementById('calDettaglio'); if(!box) return;
+  if(!calGiornoSel){box.innerHTML='<div class="small" style="text-align:center;color:var(--muted);margin-top:8px">Tocca una casella per vedere le irrigazioni di quel giorno.</div>'; return;}
+  const irrs=(db.irrigazioni||[]).filter(i=>i.data===calGiornoSel).sort((a,b)=>(a.data||'').localeCompare(b.data||''));
+  if(!irrs.length){box.innerHTML=`<div class="notice"><b>${formatDataIT(calGiornoSel)}</b><br>Nessuna irrigazione registrata in questo giorno.</div>`; return;}
+  const html=irrs.map(i=>{const t=i.totali||{}; return `<div class="item"><div class="item-title">${esc(descrizioneIrrigazione(i))}</div><div><span class="pill">Ore ${fmt(i.ore,2)}</span><span class="pill">${fmt(t.litriMin,1)} L/min</span><span class="pill">${fmt(t.mmCampo,2)} mm</span></div><div class="item-meta">${fmt(t.m3,2)} m³ · ${fmt(t.litri,0)} L${i.note?'<br>Note: '+esc(i.note):''}</div><div class="item-actions"><button onclick="editIrr('${i.id}')">Modifica</button><button class="secondary" onclick="stampaIrr('${i.id}')">Stampa</button><button class="secondary" onclick="whatsappIrr('${i.id}')">WhatsApp</button></div></div>`}).join('');
+  box.innerHTML=`<h3 style="margin-top:14px">Irrigazioni del ${formatDataIT(calGiornoSel)}</h3>${html}`;
+}
+
+// === Piani di irrigazione (form dedicato, come i campi) ===
+let pianoVoci=[];
+let settoriPianoSel=[];
+function pianoCampoSelObj(){return db.campi.find(c=>c.id===document.getElementById('pianoCampoSel')?.value);}
+function pianoCampoChanged(){const c=pianoCampoSelObj(); const modoSel=document.getElementById('pianoModo'); if(c && (c.settori||[]).length){modoSel.value='settori';} else if(c){modoSel.value='tutti';} pianoToggleModo();}
+function pianoToggleModo(){const modo=document.getElementById('pianoModo').value; const box=document.getElementById('pianoBoxSettori'); box.classList.toggle('hidden', modo!=='settori'); pianoRenderSettori();}
+function pianoRenderSettori(){
+  const box=document.getElementById('pianoBoxSettori'); if(!box)return;
+  const modo=document.getElementById('pianoModo').value;
+  if(modo!=='settori'){box.innerHTML=''; return;}
+  const c=pianoCampoSelObj();
+  if(!c){box.innerHTML='<div class="notice">Scegli un campo.</div>';return}
+  const sett=c.settori||[];
+  if(!sett.length){box.innerHTML='<div class="notice">Questo campo non ha settori/varietà. Usa "Tutti i filari del campo".</div>';return}
+  box.innerHTML='<b>Spunta i settori/varietà da includere:</b>'+sett.map(s=>`<label class="checkline"><input type="checkbox" class="pianoSettCheck" value="${s.id}"><span><b>${esc(s.nome)}</b><br><span class="small">Filari ${labelFilariNumeri(s.numeriFilari,s.filari)}</span></span></label>`).join('');
+}
+function pianoAggiungiCampo(){
+  const c=pianoCampoSelObj(); if(!c){alert('Scegli un campo da aggiungere');return}
+  const modo=document.getElementById('pianoModo').value;
+  if(modo==='tutti'){
+    pianoVoci.push({campoId:c.id, campoNome:c.nome, modo:'tutti', settoreNome:'Tutto campo', numeriFilari:`1-${n(c.filariTot)}`, lungFilare:n(c.lungFilare)});
+  } else {
+    const checked=[...document.querySelectorAll('.pianoSettCheck:checked')].map(x=>x.value);
+    if(!checked.length){alert('Spunta almeno un settore, oppure scegli "Tutti i filari del campo".');return}
+    (c.settori||[]).filter(s=>checked.includes(s.id)).forEach(s=>{
+      pianoVoci.push({campoId:c.id, campoNome:c.nome, modo:'settori', settoreNome:s.nome, numeriFilari:s.numeriFilari||'', lungFilare:n(s.lungFilare)||n(c.lungFilare)});
+    });
+  }
+  document.getElementById('pianoCampoSel').value=''; pianoRenderSettori(); renderPianoVoci();
+}
+function rimuoviPianoVoce(i){pianoVoci.splice(i,1); renderPianoVoci();}
+function renderPianoVoci(){
+  const box=document.getElementById('pianoListaVoci'); if(!box)return;
+  if(!pianoVoci.length){box.innerHTML='<div class="notice">Nessun campo aggiunto al piano. Scegli un campo, eventualmente i settori, e premi "Aggiungi campo al piano".</div>';return}
+  box.innerHTML=pianoVoci.map((v,i)=>`<div class="mix-item"><div><b>${esc(v.campoNome)}</b><br><small>${v.modo==='tutti'?'tutto il campo':esc(v.settoreNome)}</small></div><div class="mix-actions"><button class="danger" onclick="rimuoviPianoVoce(${i})">Elimina</button></div></div>`).join('');
+}
+function resetPianoForm(){document.getElementById('pianoEditId').value=''; document.getElementById('pianoNome').value=''; document.getElementById('pianoNota').value=''; document.getElementById('pianoCampoSel').value=''; document.getElementById('pianoModo').value='settori'; pianoVoci=[]; pianoRenderSettori(); renderPianoVoci();}
+function salvaPianoForm(){
+  const nome=document.getElementById('pianoNome').value.trim();
+  if(!nome){alert('Inserisci il nome del piano (es. Vigneti Nord).');return}
+  if(!pianoVoci.length){alert('Aggiungi almeno un campo al piano.');return}
+  const id=document.getElementById('pianoEditId').value||uid();
+  const piano={id, nome, nota:document.getElementById('pianoNota').value.trim(), voci:pianoVoci.map(v=>({...v}))};
+  if(!db.piani)db.piani=[];
+  const i=db.piani.findIndex(p=>p.id===id); if(i>=0)db.piani[i]=piano; else db.piani.push(piano);
+  save(); resetPianoForm(); renderAll();
+  alert('Piano "'+nome+'" salvato con '+piano.voci.length+' campo/settori. Ora puoi sceglierlo quando fai una nuova operazione.');
+}
+function editPiano(id){const p=(db.piani||[]).find(x=>x.id===id); if(!p)return; showSection('piani'); document.getElementById('pianoEditId').value=p.id; document.getElementById('pianoNome').value=p.nome||''; document.getElementById('pianoNota').value=p.nota||''; pianoVoci=(p.voci||[]).map(v=>({...v})); renderPianoVoci(); window.scrollTo({top:0,behavior:'smooth'});}
+function ricostruisciRigheDaPiano(piano){
+  const righe=[]; const mancanti=[];
+  (piano.voci||[]).forEach(v=>{
+    const c=db.campi.find(x=>x.id===v.campoId);
+    if(!c){ mancanti.push(v.campoNome+' (campo eliminato)'); return; }
+    if(v.modo==='tutti'){
+      righe.push(calcRiga(c,'Tutto campo',n(c.filariTot),n(c.lungFilare),null,`1-${n(c.filariTot)}`));
+    } else if(v.modo==='parziale'){
+      const fil=contaFilari(v.numeriFilari); const lung=n(v.lungFilare)||n(c.lungFilare);
+      if(fil) righe.push(calcRiga(c,'Parziale',fil,lung,null,v.numeriFilari||''));
+      else mancanti.push(v.campoNome+' (filari mancanti)');
+    } else {
+      // settori: cerca il settore nel campo ATTUALE per avere i filari aggiornati
+      const s=(c.settori||[]).find(x=>x.nome===v.settoreNome);
+      if(s) righe.push(calcRiga(c,s.nome,contaFilari(s.numeriFilari,s.filari),n(s.lungFilare)||n(c.lungFilare),n(s.micro),s.numeriFilari||''));
+      else mancanti.push(v.campoNome+' / '+v.settoreNome+' (settore non più presente)');
+    }
+  });
+  return {righe, mancanti};
+}
+function caricaPianoSelezionato(silenzioso){
+  const sel=document.getElementById('selCaricaPiano'); const id=sel?sel.value:'';
+  if(!id){ if(!silenzioso){} return; }
+  caricaPiano(id);
+}
+function caricaPiano(id){
+  const piano=(db.piani||[]).find(p=>p.id===id); if(!piano){alert('Piano non trovato.');return}
+  if(!(piano.voci||[]).length){alert('Questo piano è vuoto: non ha campi. Vai in Piani e aggiungi i campi al piano.');return}
+  if(righeIrr.length && !confirm('Hai già dei campi aggiunti. Vuoi sostituirli con il piano "'+piano.nome+'"?')) return;
+  _skipExitConfirm=true;
+  showSection('nuova');
+  _skipExitConfirm=false;
+  const {righe, mancanti}=ricostruisciRigheDaPiano(piano);
+  righeIrr=righe;
+  if(piano.nota){ const noteEl=document.getElementById('noteIrr'); if(noteEl && !noteEl.value.trim()) noteEl.value=piano.nota; }
+  renderRigheIrr(); aggiornaAnteprimaIrr();
+  let msg='Piano "'+piano.nome+'" caricato: '+righe.length+' campo/settori aggiunti. Inserisci le ore e salva.';
+  if(mancanti.length) msg+='\n\nAttenzione, NON aggiunti (forse il campo o settore è stato cambiato):\n- '+mancanti.join('\n- ');
+  if(!righe.length) msg='Attenzione: nessun campo del piano è stato caricato. Forse i campi del piano sono stati eliminati o rinominati. Controlla il piano nella sezione Piani.';
+  alert(msg);
+}
+function duplicaPiano(id){
+  const p=(db.piani||[]).find(x=>x.id===id); if(!p)return;
+  const copia=JSON.parse(JSON.stringify(p)); copia.id=uid(); copia.nome=p.nome+' copia';
+  db.piani.push(copia); save(); renderAll();
+}
+function rinominaPiano(id){
+  const p=(db.piani||[]).find(x=>x.id===id); if(!p)return;
+  const nome=prompt('Nuovo nome del piano:',p.nome); if(nome===null)return;
+  if(!nome.trim()){alert('Nome non valido');return}
+  p.nome=nome.trim();
+  const nota=prompt('Nota del piano (lascia com\'è o modifica):',p.nota||'');
+  if(nota!==null) p.nota=nota.trim();
+  save(); renderAll();
+}
+function eliminaPiano(id){
+  const p=(db.piani||[]).find(x=>x.id===id); if(!p)return;
+  if(!confirm('Eliminare il piano "'+p.nome+'"? Le irrigazioni già salvate non vengono toccate.'))return;
+  db.piani=db.piani.filter(x=>x.id!==id); save(); renderAll();
+}
+function renderPiani(){
+  const box=document.getElementById('listaPiani'); if(!box) return;
+  const arr=db.piani||[];
+  if(!arr.length){box.innerHTML='<div class="notice">Nessun piano salvato. Compila il nome, aggiungi i campi qui sopra e premi "Salva piano".</div>'; return;}
+  box.innerHTML=arr.map(p=>{
+    const dettaglio=(p.voci||[]).map(v=>{
+      const c=db.campi.find(x=>x.id===v.campoId);
+      const nomeCampo=c?c.nome:(v.campoNome+' (eliminato)');
+      let cosa=v.modo==='tutti'?'tutto il campo':(v.modo==='parziale'?('filari '+esc(v.numeriFilari||'')):esc(v.settoreNome));
+      return `<div class="small">• ${esc(nomeCampo)} — ${cosa}</div>`;
+    }).join('');
+    const campiUnici=[...new Set((p.voci||[]).map(v=>v.campoNome))].length;
+    return `<div class="item piano-card"><div class="item-title">📑 ${esc(p.nome)}</div><div><span class="pill">${campiUnici} campi</span><span class="pill">${(p.voci||[]).length} settori</span></div>${p.nota?`<div class="item-meta"><b>Nota:</b> ${esc(p.nota)}</div>`:''}<div class="item-meta" style="margin-top:6px">${dettaglio}</div><div class="item-actions"><button onclick="caricaPiano('${p.id}')">Usa per irrigare</button><button class="secondary" onclick="editPiano('${p.id}')">Modifica</button><button class="secondary" onclick="duplicaPiano('${p.id}')">Duplica</button><button class="danger" onclick="eliminaPiano('${p.id}')">Elimina</button></div></div>`;
+  }).join('');
+}
+function popolaSelectPiani(){
+  const sel=document.getElementById('selCaricaPiano'); if(!sel) return;
+  const old=sel.value;
+  const arr=db.piani||[];
+  sel.innerHTML='<option value="">-- scegli un piano --</option>'+arr.map(p=>`<option value="${p.id}">${esc(p.nome)}</option>`).join('');
+  if(arr.some(p=>p.id===old)) sel.value=old;
+}
+
+// === Quaderno V1: Magazzino concimi ===
+function resetConcimeForm(){concimeEditId.value=''; ['concNome','concN','concP','concK','concMg','concCa'].forEach(id=>{const e=document.getElementById(id); if(e)e.value='';});}
+function salvaConcime(){
+  const nome=concNome.value.trim(); if(!nome){alert('Inserisci il nome del concime');return}
+  const c={id:concimeEditId.value||uid(), nome, n:n(concN.value), p:n(concP.value), k:n(concK.value), mg:n(concMg.value), ca:n(concCa.value)};
+  const i=db.concimi.findIndex(x=>x.id===c.id); if(i>=0)db.concimi[i]=c; else db.concimi.push(c);
+  save(); resetConcimeForm(); renderAll(); concimiListWrap.classList.remove('hidden'); btnConcimiList.textContent='Chiudi tabella';
+}
+function editConcime(id){const c=db.concimi.find(x=>x.id===id); if(!c)return; showSection('concimi'); concimeEditId.value=c.id; concNome.value=c.nome||''; concN.value=c.n||0; concP.value=c.p||0; concK.value=c.k||0; concMg.value=c.mg||0; concCa.value=c.ca||0;}
+function delConcime(id){if(!confirm('Eliminare questo concime dal magazzino?'))return; db.concimi=db.concimi.filter(x=>x.id!==id); save(); renderAll();}
+function renderConcimi(){
+  const box=document.getElementById('listaConcimi'); if(!box)return;
+  const q=(document.getElementById('cercaConcimeMag')?.value||'').toLowerCase();
+  const arr=db.concimi.filter(c=>String(c.nome||'').toLowerCase().includes(q));
+  box.innerHTML=arr.length?arr.map(c=>`<div class="item"><div class="item-title">${esc(c.nome)}</div><div class="item-meta">N ${fmt(c.n,1)}% · P ${fmt(c.p,1)}% · K ${fmt(c.k,1)}% · Mg ${fmt(c.mg,1)}% · Ca ${fmt(c.ca,1)}%</div><div class="item-actions"><button onclick="editConcime('${c.id}')">Modifica</button><button class="danger" onclick="delConcime('${c.id}')">Elimina</button></div></div>`).join(''):'<div class="notice">Nessun concime nel magazzino.</div>';
+}
+
+// === Quaderno V1: tipo operazione e metodo ===
+function tipoOperazioneCorrente(){return document.getElementById('tipoOperazione')?.value||'irrigazione';}
+function metodoCorrente(){return tipoOperazioneCorrente()==='concimazione'?(document.getElementById('metodoConc')?.value||'Fertirrigazione'):'';}
+function metodoUsaAcquaImpianto(metodo){return METODI_CON_ACQUA_IMPIANTO.includes(metodo);}
+function metodoUsaAcquaBotte(metodo){return METODI_CON_ACQUA_BOTTE.includes(metodo);}
+function operazioneHaAcqua(){
+  const tipo=tipoOperazioneCorrente();
+  if(tipo==='irrigazione') return 'impianto';
+  const m=metodoCorrente();
+  if(metodoUsaAcquaImpianto(m)) return 'impianto';
+  if(metodoUsaAcquaBotte(m)) return 'botte';
+  return 'no';
+}
+function operazioneHaConcime(){return tipoOperazioneCorrente()==='concimazione';}
+function toggleTipoOperazione(){
+  const tipo=tipoOperazioneCorrente();
+  document.getElementById('boxMetodo').classList.toggle('hidden', tipo!=='concimazione');
+  document.getElementById('boxConcime').classList.toggle('hidden', tipo!=='concimazione');
+  toggleMetodo();
+}
+function toggleMetodo(){
+  const acqua=operazioneHaAcqua();
+  document.getElementById('boxOre').classList.toggle('hidden', acqua!=='impianto');
+  document.getElementById('boxBotti').classList.toggle('hidden', acqua!=='botte');
+  const nm=document.getElementById('noteMetodo');
+  if(nm){
+    const m=metodoCorrente();
+    if(acqua==='impianto') nm.innerHTML='Questo metodo usa l\'impianto: conta come irrigazione (calcola acqua/mm) <b>e</b> come concimazione.';
+    else if(acqua==='botte') nm.innerHTML='Manichetta: l\'acqua è quella delle botti (n° botti × litri). Conta come apporto idrico <b>e</b> come concimazione.';
+    else nm.innerHTML='Questo metodo distribuisce <b>solo concime</b>, senza acqua. Va nel registro concimazioni.';
+  }
+  aggiornaAnteprimaIrr();
+}
+
+// === Quaderno V1: miscela concime nell'operazione ===
+function renderSelectConcimiIrr(){
+  const sel=document.getElementById('selConcimeIrr'); if(!sel)return;
+  const q=(document.getElementById('cercaConcimeIrr')?.value||'').toLowerCase();
+  const arr=db.concimi.filter(c=>String(c.nome||'').toLowerCase().includes(q));
+  if(!db.concimi.length){sel.innerHTML='<option value="">Nessun concime in magazzino</option>'; return;}
+  if(!arr.length){sel.innerHTML='<option value="">Nessun concime trovato</option>'; return;}
+  sel.innerHTML=arr.map(c=>`<option value="${c.id}">${esc(c.nome)} — N ${fmt(c.n,1)} P ${fmt(c.p,1)} K ${fmt(c.k,1)} Mg ${fmt(c.mg,1)} Ca ${fmt(c.ca,1)}</option>`).join('');
+}
+function ettariOperazione(){let ha=0; righeIrr.forEach(r=>ha+=n(r.ettari)); return ha;}
+function aggiornaDoseConc(){const area=ettariOperazione(); const kg=n(concKgTot.value); if(area>0 && kg>0) concDoseHa.value=(kg/area).toFixed(2);}
+function aggiornaKgConc(){const area=ettariOperazione(); const dose=n(concDoseHa.value); if(area>0 && dose>0) concKgTot.value=(dose*area).toFixed(2);}
+function aggiungiAMiscelaIrr(){
+  if(!db.concimi.length){alert('Prima inserisci i concimi nel Magazzino concimi.');return}
+  const cId=selConcimeIrr.value; const c=db.concimi.find(x=>x.id===cId);
+  if(!c){alert('Scegli un concime.');return}
+  const area=ettariOperazione();
+  let dose=n(concDoseHa.value); const kgTot=n(concKgTot.value);
+  if((!dose||dose<=0) && kgTot>0 && area>0) dose=kgTot/area;
+  if((!dose||dose<=0) && (!kgTot||kgTot<=0)){alert('Inserisci la dose kg/ha oppure i kg totali. (Aggiungi prima i campi così il programma conosce gli ettari.)');return}
+  const totaleKg=kgTot>0?kgTot:(area>0?dose*area:0);
+  miscelaIrr.push({nome:c.nome, dose, totaleKg, un:dose*n(c.n)/100, up:dose*n(c.p)/100, uk:dose*n(c.k)/100, umg:dose*n(c.mg)/100, uca:dose*n(c.ca)/100});
+  concKgTot.value=''; concDoseHa.value='';
+  renderMiscelaIrr(); aggiornaAnteprimaIrr();
+}
+function rimuoviMiscelaIrr(i){miscelaIrr.splice(i,1); renderMiscelaIrr(); aggiornaAnteprimaIrr();}
+function renderMiscelaIrr(){
+  const box=document.getElementById('listaMiscelaIrr'); if(!box)return;
+  const area=ettariOperazione();
+  box.innerHTML=miscelaIrr.map((m,i)=>{
+    const kg=n(m.totaleKg)>0?n(m.totaleKg):(area>0?m.dose*area:0);
+    return `<div class="mix-item"><div><b>${esc(m.nome)}</b><br><small>${fmt(m.dose,2)} kg/ha${kg>0?' — totale '+fmt(kg,1)+' kg':''}</small></div><div class="mix-actions"><button class="danger" onclick="rimuoviMiscelaIrr(${i})">Elimina</button></div></div>`;
+  }).join('');
+  const u=document.getElementById('unitaConcime');
+  if(u){
+    if(miscelaIrr.length){
+      let tn=0,tp=0,tk=0,tmg=0,tca=0; miscelaIrr.forEach(m=>{tn+=m.un;tp+=m.up;tk+=m.uk;tmg+=m.umg||0;tca+=m.uca||0;});
+      u.classList.remove('hidden');
+      u.innerHTML=`<b>Unità per ettaro distribuite</b><div style="margin-top:6px"><span class="pill">N ${fmt(tn,1)}</span><span class="pill">P ${fmt(tp,1)}</span><span class="pill">K ${fmt(tk,1)}</span><span class="pill">Mg ${fmt(tmg,1)}</span><span class="pill">Ca ${fmt(tca,1)}</span></div>`;
+    } else u.classList.add('hidden');
+  }
+}
+function totaliConcimeMiscela(){
+  let tn=0,tp=0,tk=0,tmg=0,tca=0; miscelaIrr.forEach(m=>{tn+=m.un;tp+=m.up;tk+=m.uk;tmg+=m.umg||0;tca+=m.uca||0;});
+  return {n:tn,p:tp,k:tk,mg:tmg,ca:tca};
+}
+
+function popolaSelectCampoPiano(){const sel=document.getElementById('pianoCampoSel'); if(!sel)return; const old=sel.value; sel.innerHTML='<option value="">-- scegli campo --</option>'+db.campi.map(c=>`<option value="${c.id}">${esc(c.nome)}</option>`).join(''); if(db.campi.some(c=>c.id===old))sel.value=old;}
+function renderAll(){popolaSelStagione(); renderDashboard(); renderSelects(); renderSettoriForm(); renderCampi(); renderConcimi(); renderSelectConcimiIrr(); renderMiscelaIrr(); renderRigheIrr(); renderRegistro(); renderRiepilogo(); renderPozzi(); renderDescrizioni(); renderPiani(); popolaSelectPiani(); popolaSelectCampoPiano(); renderPianoVoci(); aggiornaAnteprimaCampo(); aggiornaAnteprimaIrr(); aggiornaCalcoloRapido(); if(!document.getElementById('calendario').classList.contains('hidden')) renderCalendario();}
+function esportaJSON(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='backup-registro-irrigazioni-v43-stag-'+stagioneAttiva+'.json'; a.click(); URL.revokeObjectURL(a.href)}
+function importaJSON(e){const f=e.target.files[0]; if(!f)return; const rd=new FileReader(); rd.onload=()=>{try{const obj=JSON.parse(rd.result); if(!obj.campi||!obj.irrigazioni)throw new Error(); db=obj; if(!db.pozzi)db.pozzi=[]; if(!db.piani)db.piani=[]; if(!db.descrizioni)db.descrizioni=JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI)); if(!db.descrizioni.colture)db.descrizioni.colture=[...DEFAULT_DESCRIZIONI.colture]; if(!db.descrizioni.varieta)db.descrizioni.varieta=[...DEFAULT_DESCRIZIONI.varieta]; db.campi.forEach(c=>{if(!c.settori)c.settori=[]}); save(); renderAll(); alert('Backup importato');}catch(err){alert('File non valido')}}; rd.readAsText(f)}
+function svuotaDati(tipo){
+  const mess={
+    irrigazioni:'Vuoi cancellare tutte le irrigazioni salvate?',
+    campi:'Vuoi cancellare tutti i campi e le varietà/settori salvati?',
+    pozzi:'Vuoi cancellare tutti i pozzi salvati?',
+    descrizioni:'Vuoi ripristinare le descrizioni base? Verranno cancellati i nomi personalizzati.',
+    tutto:'ATTENZIONE: vuoi cancellare tutti i dati del programma? Campi, irrigazioni, pozzi e descrizioni saranno svuotati.'
+  };
+  if(!confirm((mess[tipo]||'Cancellare i dati?')+'\n\nHai già scaricato il backup JSON?')) return;
+  if(tipo==='irrigazioni') db.irrigazioni=[];
+  else if(tipo==='campi') db.campi=[];
+  else if(tipo==='pozzi') db.pozzi=[];
+  else if(tipo==='descrizioni') db.descrizioni=JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI));
+  else if(tipo==='tutto') db={campi:[],irrigazioni:[],pozzi:[],piani:[],descrizioni:JSON.parse(JSON.stringify(DEFAULT_DESCRIZIONI))};
+  save();
+  resetCampoForm(); resetIrrForm(); resetPozzoForm(); renderAll();
+  alert('Pulizia completata. Ora vai in Sync e premi “Invia a Google Sheets” se vuoi aggiornare anche gli altri dispositivi.');
+}
+
+['filariTot','lungFilare','interfila','haManuali','passoGoccia','portataGoccia','larghezzaBagnataAla','numMicro','portataMicro','diametroMicro'].forEach(id=>document.addEventListener('input',e=>{if(e.target.id===id){if(e.target.id==='filariTot') renderSettorePicker(); aggiornaAnteprimaCampo(); aggiornaAnteprimaIrr();}}));
+['lungFilareIrr'].forEach(id=>document.addEventListener('input',e=>{if(e.target.id===id){aggiornaAnteprimaIrr();}}));
+document.addEventListener('input',e=>{if(e.target.id==='settoreNome'||e.target.id==='settoreLung'||e.target.id==='settoreMicro'||e.target.id==='settoreStart'||e.target.id==='settoreCount'){aggiornaAnteprimaCampo();}});
+load(); caricaStagione(); loadSyncUrl(); loadAutoSync(); dataIrr.value=today(); resetCampoForm(); toggleTipoOperazione(); aggiornaSliderFill(); renderAll(); showSection('home'); autoSyncStartup();
+</script>
+</body>
+</html>
